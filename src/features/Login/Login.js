@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Button, Form, Label, FormGroup, Input } from 'reactstrap';
 import '../Login/Login.css';
+import SignUp from '../SignUp/SignUp';
 
 
 

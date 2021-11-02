@@ -38,9 +38,10 @@ export default function SignUp() {
                     Sign Up
                 </Button>
                 <div className="text-center">
-                    <a href="/signup">Log in </a>
+                    <a href="/login">Log in </a>
                 </div>
             </Form>
+
         </Fragment >
     );
 
