@@ -2,6 +2,7 @@ import React from 'react'
 import './userList.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -26,11 +27,14 @@ const columns = [
     {
         field: 'action',
         headerName: 'Action',
+        sortable: false,
         width: 150,
         renderCell: (params) => {
             return (
                 <>
-                    <button className="editBtn"> Edit</button>
+                    <Link to={"/editUser/" + params.row.id} className="dirLink">
+                        <button className="editBtn">Edit</button>
+                    </Link>
                     <DeleteOutline className="deleteBtn" />
                 </>
             )

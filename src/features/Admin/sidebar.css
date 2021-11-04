@@ -27,6 +27,7 @@
     display: flex;
     align-items: center;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 .sideBarListItem.active,
 .sideBarListItem:hover {
@@ -34,5 +35,8 @@
 }
 .dirLink {
     text-decoration: none;
+    color: #555;
+}
+.dirLink:hover {
     color: #555;
 }

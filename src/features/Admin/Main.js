@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react';
 import Header from './header';
 import './Main.css';
 import UserList from './page/UserList';
 import Sidebar from './Sidebar';
 import {
     BrowserRouter as Router,
-    Link,
     Route,
     Switch
 } from 'react-router-dom';
 import Home from './page/Home';
+import EditUser from './page/EditUser';
+import Adduser from './page/Adduser';
 
 function Main() {
     return (
@@ -22,6 +22,12 @@ function Main() {
                     <Switch>
                         <Route exact path="/userList">
                             <UserList />
+                        </Route>
+                        <Route exact path="/addUser">
+                            <Adduser />
+                        </Route>
+                        <Route exact path="/editUser/:userId">
+                            <EditUser />
                         </Route>
                         <Route exact path="/">
                             <Home />

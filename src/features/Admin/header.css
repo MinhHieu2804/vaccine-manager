@@ -16,3 +16,6 @@
     color: darkblue;
     cursor: pointer;
 }
+.dirLink {
+    text-decoration: none;
+}
