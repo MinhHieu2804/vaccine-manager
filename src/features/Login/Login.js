@@ -20,7 +20,7 @@ function Login() {
                         className="input"
                     />
                     <Label for="Phonenumber">
-                        Phonenumber
+                        Phone Number
                     </Label>
                 </FormGroup>
                 {' '}
@@ -41,12 +41,11 @@ function Login() {
                     Log in
                 </Button>
                 <div className="text-center">
-                    <a href="/signup">Sign Up </a>
+                    <a href="/signup" className="link">Sign Up </a>
                 </div>
             </Form>
         </Fragment >
     );
-
 }
 
 export default Login;

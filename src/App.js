@@ -1,8 +1,8 @@
-import './App.css';
 import Login from './features/Login/Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Fragment } from 'react';
 import SignUp from './features/SignUp/SignUp';
+import Main from './features/Admin/Main';
 import {
   BrowserRouter as Router,
   Link,
@@ -14,7 +14,7 @@ import {
 function App() {
   return (
     <Router>
-      <Fragment>
+      <>
         <Switch>
           <Route exact path="/login">
             <Login />
@@ -23,10 +23,10 @@ function App() {
             <SignUp />
           </Route>
           <Route path="*">
-            <div>Page not found</div>
+            <Main />
           </Route>
         </Switch>
-      </Fragment>
+      </>
     </Router>
   );
 }

@@ -1,0 +1,23 @@
+.userList {
+    flex: 4;
+    padding-top: 10px;
+    height: 700;
+}
+h1 {
+    padding-left: 15px;
+    padding-top: 15px;
+}
+.deleteBtn {
+    color: red;
+    cursor: pointer;
+}
+.editBtn {
+    border: none;
+    border-radius: 10px;
+    background-color: #10b981;
+    color: white;
+    cursor: pointer;
+    margin-right: 40px;
+    font-size: 12px;
+    display: inline;
+}

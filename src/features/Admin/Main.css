@@ -1,0 +1,9 @@
+.mycontainer {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+hr {
+    padding: 0;
+    margin: 0;
+}

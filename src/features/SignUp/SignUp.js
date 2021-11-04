@@ -17,7 +17,7 @@ export default function SignUp() {
                         className="input"
                     />
                     <Label for="Phonenumber">
-                        Phonenumber
+                        Phone Number
                     </Label>
                 </FormGroup>
                 {' '}
@@ -38,7 +38,7 @@ export default function SignUp() {
                     Sign Up
                 </Button>
                 <div className="text-center">
-                    <a href="/login">Log in </a>
+                    <a href="/login" className="link">Log in </a>
                 </div>
             </Form>
 
