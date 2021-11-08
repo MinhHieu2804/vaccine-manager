@@ -27,6 +27,7 @@ if($vaccination->cccd!=null){
     // create array
     $vaccination_arr = array(
         "id" =>  $vaccination->id,
+        "cccd" => $vaccination->cccd,
         "vaccine_id" => $vaccination->vaccine_id,
         "health_center_id" => $vaccination->health_center_id,
         "date" => $vaccination->date,

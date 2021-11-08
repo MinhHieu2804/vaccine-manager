@@ -5,9 +5,9 @@ $(document).ready(function() {
         // get vaccination id
         var id = $(this).attr('data-id');
         // read vaccination record based on given ID
-        $.getJSON("http://localhost/rest_api_auth/api/roles/admin/vaccination/read_one_vaccination.php?id=" + id, function(data) {
-            $.getJSON("http://localhost/rest_api_auth/api/roles/admin/vaccine/read_one.php?id=" + data.vaccine_id, function(data1) {
-                $.getJSON("http://localhost/rest_api_auth/api/roles/admin/health_center/read_one.php?id=" + data.health_center_id, function(data2) {
+        $.getJSON("http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/vaccination/read_one_vaccination.php?id=" + id, function(vaccination) {
+            $.getJSON("http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/vaccine/read_one.php?id=" + vaccination.vaccine_id, function(vaccine) {
+                $.getJSON("http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/health_center/read_one.php?id=" + vaccination.health_center_id, function(center) {
                     //do stuff with 'data' and 'data2'
 
                     // start html
@@ -22,37 +22,37 @@ $(document).ready(function() {
                         <!-- vaccination name -->
                         <tr>
                             <td class='w-30-pct'>CCCD</td>
-                            <td class='w-70-pct'>` + data.cccd + `</td>
+                            <td class='w-70-pct'>` + vaccination.cccd + `</td>
                         </tr>
                     
                         <!-- vaccination price -->
                         <tr>
                             <td>Vaccine</td>
-                            <td>` + data1.name + `</td>
+                            <td>` + vaccine.name + `</td>
                         </tr>
 
                         <!-- vaccination price -->
                         <tr>
                             <td>Cơ sở y tế</td>
-                            <td>` + data2.name + `</td>
+                            <td>` + center.name + `</td>
                         </tr>
 
                         <!-- vaccination price -->
                         <tr>
                             <td>Lần tiêm</td>
-                            <td>` + data.vaccinate_no + `</td>
+                            <td>` + vaccination.vaccinate_no.split("-").reverse().join("/") + `</td>
                         </tr>
 
                         <!-- vaccination price -->
                         <tr>
                             <td>Ngày tiêm</td>
-                            <td>` + data.date + `</td>
+                            <td>` + vaccination.date + `</td>
                         </tr>
                     
                         <!-- vaccination description -->
                         <tr>
                             <td>Ghi chú</td>
-                            <td>` + data.note + `</td>
+                            <td>` + vaccination.note + `</td>
                         </tr>
                     
                         

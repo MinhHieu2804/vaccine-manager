@@ -28,8 +28,8 @@ $vaccination->cccd = $data->cccd;
 $vaccination->vaccine_id = $data->vaccine_id;
 $vaccination->health_center_id = $data->health_center_id;
 $vaccination->vaccinate_no = $data->vaccinate_no;
-$vaccination->date = (isset($data->date) && $date->date != null ? $data->date : "");
-$vaccination->note = (isset($data->note) && $data->note != null ? $data->note : "");
+$vaccination->date =  $data->date;
+$vaccination->note = $data->note;
   
 // update the vaccination
 if($vaccination->update()){
@@ -39,6 +39,7 @@ if($vaccination->update()){
   
     // tell the user
     echo json_encode(array("message" => "vaccination was updated."));
+
 }
   
 // if unable to update the vaccination, tell the user

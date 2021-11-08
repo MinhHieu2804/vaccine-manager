@@ -3,8 +3,8 @@ $(document).ready(function() {
     // show html form when 'create vaccination' button was clicked
     $(document).on('click', '.create-vaccination-button', function() {
         // load list of vaccines
-        $.getJSON("http://localhost/rest_api_auth/api/roles/admin/vaccine/read.php", function(data) {
-            $.getJSON("http://localhost/rest_api_auth/api/roles/admin/health_center/read.php", function(data2) {
+        $.getJSON("http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/vaccine/read.php", function(data) {
+            $.getJSON("http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/health_center/read.php", function(data2) {
                 // build vaccines option html
                 // loop through returned list of data
                 var centers_options_html = `<select name='health_center_id' class='form-control'>`;
@@ -47,7 +47,6 @@ $(document).ready(function() {
                                 <td>` + centers_options_html + `</td>
                             </tr>
                     
-                            <!-- description field -->
                     
                             <!-- price field -->
                             <tr>
@@ -55,10 +54,10 @@ $(document).ready(function() {
                                 <td><input type='number' min='1' name='vaccinate_no' class='form-control' required /></td>
                             </tr>
                     
-                            <!-- price field -->
+                            <!-- date field -->
                             <tr>
                                 <td>Ngày tiêm</td>
-                                <td><input type='date'  name='date' class='form-control' required /></td>
+                                <td><input type='date' name='date' class='form-control' required /></td>
                             </tr>
                     
                             <tr>
@@ -97,7 +96,7 @@ $(document).ready(function() {
         var form_data = JSON.stringify($(this).serializeObject());
         // submit form data to api
         $.ajax({
-            url: "http://localhost/rest_api_auth/api/roles/admin/vaccination/create_vaccination.php",
+            url: "http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/vaccination/create_vaccination.php",
             type: "POST",
             contentType: 'application/json',
             data: form_data,
@@ -114,14 +113,3 @@ $(document).ready(function() {
         return false;
     });
 });
-
-
-
-// <!-- vaccines 'select' field 
-//                             <tr>
-//                                 <td>vaccine</td>
-//                                 <td>` + vaccines_options_html + `</td>
-//                             </tr>-->
-
-
-//

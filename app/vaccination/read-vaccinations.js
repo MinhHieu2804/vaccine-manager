@@ -12,7 +12,7 @@ $(document).ready(function() {
 // function to show list of products
 function showVaccinations() {
     // get list of products from the API
-    $.getJSON("http://localhost/rest_api_auth/api/roles/admin/vaccination/read_vaccinations.php", function(data) {
+    $.getJSON("http://localhost/New%20folder%20(2)/vaccine-manager/api/roles/admin/vaccination/read_vaccinations.php", function(data) {
         // html for listing products
         var read_vaccinations_html = `
         <!-- when clicked, it will load the create vaccination form -->

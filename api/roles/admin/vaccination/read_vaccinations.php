@@ -41,6 +41,7 @@ if ($num > 0) {
             "ten" => $ten,
             "vaccine_name" => $vaccine_name,
             "date" => $date,
+            "vaccinate_no" => $vaccinate_no,
             "note" => $note
         );
 

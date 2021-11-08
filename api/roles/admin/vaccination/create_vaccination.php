@@ -25,7 +25,8 @@ if(
     !empty($data->cccd) &&
     !empty($data->vaccine_id) &&
     !empty($data->health_center_id) &&
-    !empty($data->vaccinate_no)
+    !empty($data->vaccinate_no) &&
+    !empty($data->date)
 ){
   
     // set vaccination property values
@@ -33,8 +34,8 @@ if(
     $vaccination->vaccine_id = $data->vaccine_id;
     $vaccination->health_center_id = $data->health_center_id;
     $vaccination->vaccinate_no = $data->vaccinate_no;
-    $vaccination->date = (isset($data->date) && $date->date != null ? $data->date : "");
-    $vaccination->note = (isset($data->note) && $data->note != null ? $data->note : "");
+    $vaccination->date = $data->date;
+    $vaccination->note = $data->note;
     $vaccination->created = date('Y-m-d H:i:s');
   
     // create the vaccination
