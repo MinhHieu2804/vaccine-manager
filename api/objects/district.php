@@ -1,9 +1,9 @@
 <?php
-class Ward{
+class District{
   
     // database connection and table name
     private $conn;
-    private $table_name = "ward";
+    private $table_name = "district";
   
     // object properties
     public $id;
@@ -21,7 +21,7 @@ class Ward{
     
         //select all data
         $query = "SELECT
-                    id, _name, _district_id, _province_id
+                    id, _name, _province_id
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -39,7 +39,7 @@ class Ward{
         
         // query to read single record
         $query = "SELECT
-                    _name, _district_id, _province_id
+                    _name, _province_id
                 FROM
                     " . $this->table_name . " 
                 WHERE
@@ -61,7 +61,6 @@ class Ward{
 
         // set values to object properties
         $this->name = $row['_name'];
-        $this->district_id = $row['_district_id'];
         $this->province_id = $row['_province_id'];
     }
 }
