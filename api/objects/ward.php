@@ -1,28 +1,27 @@
 <?php
-class Vaccine{
+class Ward{
   
     // database connection and table name
     private $conn;
-    private $table_name = "vaccine";
+    private $table_name = "ward";
   
     // object properties
     public $id;
     public $name;
-    public $created;
+    public $district_id;
+    public $province_id;
   
     public function __construct($db){
         $this->conn = $db;
     }
   
     
-    
-
     // used by select drop-down list
     public function read(){
     
         //select all data
         $query = "SELECT
-                    id, name, description
+                    id, name, _district_id, _province_id
                 FROM
                     " . $this->table_name . "
                 ORDER BY
@@ -38,7 +37,7 @@ class Vaccine{
         
         // query to read single record
         $query = "SELECT
-                    name, created
+                    name, _district_id, _province_id
                 FROM
                     " . $this->table_name . " 
                 WHERE
@@ -60,7 +59,8 @@ class Vaccine{
 
         // set values to object properties
         $this->name = $row['name'];
-        $this->created = $row['created'];
+        $this->district_id = $row['_district_id'];
+        $this->province_id = $row['_province_id'];
     }
 }
 ?>

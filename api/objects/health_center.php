@@ -15,21 +15,7 @@ class HealthCenter{
         $this->conn = $db;
     }
   
-    // used by select drop-down list
-    public function readAll(){
-        //select all data
-        $query = "SELECT
-                    id, name
-                FROM
-                    " . $this->table_name . "
-                ORDER BY
-                    name";
-  
-        $stmt = $this->conn->prepare( $query );
-        $stmt->execute();
-  
-        return $stmt;
-    }
+    
 
     // used by select drop-down list
 public function read(){
