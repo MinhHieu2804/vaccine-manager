@@ -63,5 +63,28 @@ class District{
         $this->name = $row['_name'];
         $this->province_id = $row['_province_id'];
     }
+
+    function read_with_province_id($province_id){
+        
+        // query to read single record
+        $query = "SELECT
+                    id, _name, _province_id
+                FROM
+                    " . $this->table_name . " 
+                WHERE
+                    _province_id = ?
+                ";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+
+        // bind id of product to be updated
+        $stmt->bindParam(1, $province_id);
+
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
+    }
 }
 ?>
