@@ -28,7 +28,7 @@ class Vaccination
 
         // select all query
         $query = "SELECT
-                    v1.id, v1.cccd, c.ho_dem, c.ten, v2.name as vaccine_name, v1.date, v1.note, v1.created
+                    v1.id, v1.cccd, c.ho_dem, c.ten, v2.name as vaccine_name, v1.date, v1.note, v1.created, v1.vaccinate_no
                 FROM
                     " . $this->table_name . " v1
                     LEFT JOIN
@@ -161,7 +161,7 @@ class Vaccination
     
         // query to read single record
         $query = "SELECT
-                    cccd, vaccine_id, health_center_id, date, note, created
+                    cccd, vaccine_id, health_center_id, date, vaccinate_no, note, created
                 FROM
                     " . $this->table_name . " 
                 WHERE
@@ -187,6 +187,33 @@ class Vaccination
         $this->health_center_id = $row['health_center_id'];
         $this->date = $row['date'];
         $this->note = $row['note'];
+        $this->vaccinate_no = $row['vaccinate_no'];
         $this->created = $row['created'];
+    }
+
+    function read_with_cccd() {
+        $query = "SELECT
+        v2.name as vaccine_name, v1.date, v1.note, v1.created, v1.vaccinate_no, h.name as center_name
+    FROM
+        " . $this->table_name . " v1
+        LEFT JOIN
+            vaccine v2 ON v1.vaccine_id = v2.id  
+        LEFT JOIN
+            health_center h ON v1.health_center_id = h.id
+        WHERE v1.cccd = ?
+    ORDER BY
+        v1.created DESC";
+
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $this->cccd);
+
+        // execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
 }
-}
+
+

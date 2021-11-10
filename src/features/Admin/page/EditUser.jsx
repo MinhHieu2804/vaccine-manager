@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 
 export default function EditUser() {
     const onFinish = (values) => {
-        console.log('Success:', values);
+        console.log('Success:', values.dateOfBirth._d.toLocaleDateString());
     };
 
     const onFinishFailed = (errorInfo) => {
