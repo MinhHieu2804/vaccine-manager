@@ -1,11 +1,15 @@
 import React from 'react'
 import './edituser.css';
-import { Form, Input, Button, Checkbox, DatePicker } from 'antd';
+import { Form, Input, Button, DatePicker } from 'antd';
 import 'antd/dist/antd.css';
 
 export default function EditUser() {
     const onFinish = (values) => {
-        console.log('Success:', values.dateOfBirth._d.toLocaleDateString());
+        values = {
+            ...values,
+            dateOfBirth: values.dateOfBirth._d.toLocaleDateString()
+        }
+        console.log('Success:', values);
     };
 
     const onFinishFailed = (errorInfo) => {
