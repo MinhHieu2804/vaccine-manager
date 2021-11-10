@@ -1,5 +1,6 @@
 import Login from './features/Login/Login.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as React from 'react';
 import { Fragment } from 'react';
 import SignUp from './features/SignUp/SignUp';
 import Main from './features/Admin/Main';
@@ -14,7 +15,7 @@ import {
 function App() {
   return (
     <Router>
-      <>
+      <Fragment>
         <Switch>
           <Route exact path="/login">
             <Login />
@@ -26,7 +27,7 @@ function App() {
             <Main />
           </Route>
         </Switch>
-      </>
+      </Fragment>
     </Router>
   );
 }

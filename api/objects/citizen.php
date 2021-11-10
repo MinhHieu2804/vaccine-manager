@@ -243,7 +243,7 @@ class Citizen
 
         // select all query
         $query = "SELECT
-                    c.cccd, c.ho_dem, c.ten, c.birthday, c.phone_number, c.email, c.address,
+                    c.id, c.cccd, c.ho_dem, c.ten, c.birthday, c.phone_number, c.email, c.address,
                     w._name as ward, d._name as district, p._name as province
                 FROM
                 " . $this->table_name . " as c
