@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/%3Cproject-repo%3E/static/css/main.4a878a7e.chunk.css",
+    "main.js": "/%3Cproject-repo%3E/static/js/main.ecced014.chunk.js",
+    "main.js.map": "/%3Cproject-repo%3E/static/js/main.ecced014.chunk.js.map",
+    "runtime-main.js": "/%3Cproject-repo%3E/static/js/runtime-main.ff7486ea.js",
+    "runtime-main.js.map": "/%3Cproject-repo%3E/static/js/runtime-main.ff7486ea.js.map",
+    "static/css/2.f2273473.chunk.css": "/%3Cproject-repo%3E/static/css/2.f2273473.chunk.css",
+    "static/js/2.c2cf267e.chunk.js": "/%3Cproject-repo%3E/static/js/2.c2cf267e.chunk.js",
+    "static/js/2.c2cf267e.chunk.js.map": "/%3Cproject-repo%3E/static/js/2.c2cf267e.chunk.js.map",
+    "index.html": "/%3Cproject-repo%3E/index.html",
+    "static/css/2.f2273473.chunk.css.map": "/%3Cproject-repo%3E/static/css/2.f2273473.chunk.css.map",
+    "static/css/main.4a878a7e.chunk.css.map": "/%3Cproject-repo%3E/static/css/main.4a878a7e.chunk.css.map",
+    "static/js/2.c2cf267e.chunk.js.LICENSE.txt": "/%3Cproject-repo%3E/static/js/2.c2cf267e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff7486ea.js",
+    "static/css/2.f2273473.chunk.css",
+    "static/js/2.c2cf267e.chunk.js",
+    "static/css/main.4a878a7e.chunk.css",
+    "static/js/main.ecced014.chunk.js"
+  ]
+}
