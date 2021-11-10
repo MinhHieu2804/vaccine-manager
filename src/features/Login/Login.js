@@ -4,7 +4,6 @@ import '../Login/Login.css';
 import SignUp from '../SignUp/SignUp';
 
 
-
 function Login() {
     return (
         <Fragment>

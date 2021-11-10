@@ -23,6 +23,9 @@ h1 {
     width: 50px;
     display: block;
 }
+.editBtn:hover {
+    background-color: #0e9668;
+}
 .dirLink {
     text-decoration: none;
 }

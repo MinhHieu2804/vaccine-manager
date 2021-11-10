@@ -6,7 +6,7 @@ export default function Adduser() {
     return (
         <div className="addUser">
             <h1>Add User</h1>
-            <div className="editorWrapper">
+            <div className="addWrapper">
                 <Form>
                     <FormGroup>
                         <Label for="exampleEmail">

@@ -3,10 +3,17 @@
 }
 
 .editorWrapper {
-    margin-left: 20px;
     padding: 20px;
     width: 70%;
     -webkit-box-shadow: 3px 24px 68px -64px rgba(69, 61, 69, 1);
     -moz-box-shadow: 3px 24px 68px -64px rgba(69, 61, 69, 1);
     box-shadow: 3px 24px 68px -64px rgba(69, 61, 69, 1);
+}
+.updateBtn {
+    width: 100%;
+    background: #10b981 !important ;
+    border: none !important ;
+}
+.updateBtn:hover {
+    background: #0e9668 !important;
 }

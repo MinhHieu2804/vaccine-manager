@@ -1,13 +1,15 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import './userList.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+import { Button } from 'reactstrap';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
-    { field: 'firstName', headerName: 'First name', width: 170 },
-    { field: 'lastName', headerName: 'Last name', width: 170 },
+    { field: 'name', headerName: 'First name', width: 170 },
+    { field: 'email', headerName: 'Last name', width: 170 },
     {
         field: 'age',
         headerName: 'Age',
@@ -33,7 +35,7 @@ const columns = [
             return (
                 <>
                     <Link to={"/editUser/" + params.row.id} className="dirLink">
-                        <button className="editBtn">Edit</button>
+                        <Button className="editBtn">Edit</Button>
                     </Link>
                     <DeleteOutline className="deleteBtn" />
                 </>
@@ -54,13 +56,28 @@ const rows = [
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
+
+
 export default function UserList() {
+    const [rows1, setRows1] = useState([]);
+
+    useEffect(() => {
+        axios('https://jsonplaceholder.typicode.com/users')
+            .then(res => {
+                setRows1(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.error("error :", err);
+            })
+    }, [])
+
     return (
         <div className="userList">
             <h1>User List</h1>
             <br />
             <DataGrid
-                rows={rows} disableSelectionOnClick
+                rows={rows1} disableSelectionOnClick
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
