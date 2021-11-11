@@ -1,4 +1,5 @@
-import { React, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import * as React from 'react'
 import './userList.css';
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@material-ui/icons';

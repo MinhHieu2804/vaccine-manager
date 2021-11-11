@@ -35,12 +35,13 @@ if($num>0){
         extract($row);
   
         $citizen_item=array(
+            "id" => $id,
             "cccd" => $cccd,
             "ho_dem" => $ho_dem,
             "ten" => $ten,
             "birthday" => $birthday,
             "phone_number" => $phone_number,
-            "ten" => $ten,
+            "email" => $email,
             "address" => $address,
             "ward" => $ward,
             "district" => $district,
