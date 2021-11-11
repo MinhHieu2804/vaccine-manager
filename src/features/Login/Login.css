@@ -1,13 +1,49 @@
-.login-form {
-    width: 100%;
-    max-width: 330px;
+.loginForm {
+    height: 600px;
+    width: 60vw;
     margin: auto;
-    margin-top: 200px;
-    padding: 15px;
-    border: solid 3px;
-    border-radius: 5%;
+    display: flex;
+    align-content: center;
+    position: relative;
+    top: 90px;
+    -webkit-box-shadow: 10px 10px 109px 5px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 10px 10px 109px 5px rgba(0, 0, 0, 0.13);
+    box-shadow: 10px 10px 109px 5px rgba(0, 0, 0, 0.13);
 }
 
-a.link {
-    text-decoration: none;
+.aside {
+    flex: 8;
+    background-color: aqua;
+}
+.mainForm {
+    flex: 7;
+    background-color: rgb(230, 233, 232);
+}
+.myForm {
+    width: 80%;
+    position: relative;
+    top: 100px;
+    left: 20px;
+}
+.loginBtn {
+    width: 100%;
+    border: none !important;
+    background-color: #10b981 !important;
+}
+
+.loginBtn:hover {
+    background-color: #0f996b !important;
+}
+
+.signUpLink {
+    text-align: end;
+}
+.mainForm > h1 {
+    position: relative;
+    left: 20px;
+}
+
+.aside > img {
+    height: 600px;
+    width: 100%;
 }

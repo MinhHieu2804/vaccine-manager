@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { Button } from 'reactstrap';
 
-
 export default function UserList() {
     const [rows1, setRows1] = useState([]);
 
