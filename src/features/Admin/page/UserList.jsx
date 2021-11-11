@@ -7,57 +7,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { Button } from 'reactstrap';
 
-const columns = [
-    { field: 'id', headerName: 'CMND', width: 120 },
-    { field: 'ho_dem', headerName: 'Họ & đệm', width: 170 },
-    { field: 'ten', headerName: 'Tên', width: 170 },
-    // { field: 'email', headerName: 'Last name', width: 170 },
-    // {
-    //     field: 'fullName',
-    //     headerName: 'Full name',
-    //     description: 'This column has a value getter and is not sortable.',
-    //     sortable: false,
-    //     width: 160,
-    //     valueGetter: (params) =>
-    //         `${params.getValue(params.cmnd, 'ho_dem') || ''} ${params.getValue(params.cmnd, 'ten') || ''
-    //         }`,
-    // },
-    {
-        field: 'action',
-        headerName: 'Action',
-        sortable: false,
-        width: 150,
-        renderCell: (params) => {
-            return (
-                <>
-                    <Link to={"/editUser/" + params.row.id} className="dirLink">
-                        <Button className="editBtn">Edit</Button>
-                    </Link>
-                    <DeleteOutline className="deleteBtn" />
-                </>
-            )
-        }
-    }
-];
-
-const rows = [
-    { id: 1, ho_dem: "ajsh", ten: "sfhusb" },
-    { id: 2, ho_dem: "ajsh", ten: "sfhusb" }
-]
-
 
 export default function UserList() {
     const [rows1, setRows1] = useState([]);
 
     useEffect(() => {
-        axios('http://localhost/vaccine-manager/api/roles/admin/citizen/read.php')
+        axios.get('http://localhost/vaccine-manager/api/roles/admin/citizen/read.php')
             .then(res => {
                 const { records } = res.data;
-                records = {
-                    ...records,
-                    id: records.indexof(this)
-                }
-                console.log(records);
                 setRows1(records);
             })
             .catch((err) => {
@@ -65,6 +22,40 @@ export default function UserList() {
             })
     }, [])
 
+    const handleDelete = (id) => {
+        const URL = 'http://localhost/vaccine-manager/api/roles/admin/citizen/delete.php';
+        axios.post(URL, { "id": id });
+        setRows1(rows1.filter((rec) => rec.id !== id));
+    };
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 90, hide: true },
+        { field: 'cccd', headerName: 'Số CMND', width: 150 },
+        { field: 'ho_dem', headerName: 'Họ & đệm', width: 170 },
+        { field: 'ten', headerName: 'Tên', width: 170 },
+        { field: 'email', headerName: 'Email', width: 170 },
+        { field: 'birthday', headerName: 'Ngày sinh', width: 170 },
+        { field: 'phone_number', headerName: 'Số điện thoại', width: 170 },
+        { field: 'province', headerName: 'Thành phố', width: 170, hide: true },
+        { field: 'district', headerName: 'Quận huyện', width: 170, hide: true },
+        { field: 'address', headerName: 'Địa chỉ', width: 170, hide: true },
+        {
+            field: 'action',
+            headerName: 'Action',
+            sortable: false,
+            width: 150,
+            renderCell: (params) => {
+                return (
+                    <>
+                        <Link to={"/editUser/" + params.row.id} className="dirLink">
+                            <Button className="editBtn">Edit</Button>
+                        </Link>
+                        <DeleteOutline className="deleteBtn" onClick={() => handleDelete(params.row.id)} />
+                    </>
+                )
+            }
+        }
+    ];
 
 
     return (
@@ -76,7 +67,6 @@ export default function UserList() {
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
-                checkboxSelection
             />
         </div >
     )
