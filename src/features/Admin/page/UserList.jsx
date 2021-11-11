@@ -52,8 +52,12 @@ export default function UserList() {
         axios('http://localhost/vaccine-manager/api/roles/admin/citizen/read.php')
             .then(res => {
                 const { records } = res.data;
+                records = {
+                    ...records,
+                    id: records.indexof(this)
+                }
                 console.log(records);
-                //setRows1(records);
+                setRows1(records);
             })
             .catch((err) => {
                 console.error("error :", err);
@@ -67,7 +71,7 @@ export default function UserList() {
             <h1>User List</h1>
             <br />
             <DataGrid
-                rows={rows} disableSelectionOnClick
+                rows={rows1} disableSelectionOnClick
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
