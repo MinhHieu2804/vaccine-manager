@@ -5,30 +5,30 @@ header("Content-Type: application/json; charset=UTF-8");
   
 // include database and object files
 include_once '../../../config/database.php';
-include_once '../../../objects/district.php';
-include_once '../../../objects/ward.php';
+include_once '../../../objects/citizen.php';
+include_once '../../../objects/vaccination.php';
 
-// instantiate database and district object
+// instantiate database and citizen object
 $database = new Database();
 $db = $database->getConnection();
   
 // initialize object
-$district = new District($db);
+$citizen = new Citizen($db);
 
-$ward = new Ward($db);
+$vaccination = new Vaccination($db);
 
-$district->id = isset($_GET['district_id']) ? $_GET['district_id'] : die();
+$citizen->cccd = isset($_GET['cccd']) ? $_GET['cccd'] : die();
   
-// query districts
-$stmt = $ward->read_with_district_id($district->id);
+// query citizens
+$stmt = $vaccination->read_with_cccd($citizen->cccd);
 $num = $stmt->rowCount();
   
 // check if more than 0 record found
 if($num>0){
   
     // products array
-    $wards_arr=array();
-    $wards_arr["records"]=array();
+    $vaccinations_arr=array();
+    $vaccinations_arr["records"]=array();
   
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -39,21 +39,23 @@ if($num>0){
         // just $name only
         extract($row);
   
-        $ward_item=array(
-            "id" => $id,
-            "name" => $_name,
-            "district_id" => $_district_id,
-            "province_id" => $_province_id
+        $vaccination_item=array(
+            "vaccine" => $vaccine_name,
+            "health_center" => $center_name,
+            "date" => $date,
+            "note" => $note,
+            "vaccinate_no" => $vaccinate_no,
+            "created" => $created
         );
   
-        array_push($wards_arr["records"], $ward_item);
+        array_push($vaccinations_arr["records"], $vaccination_item);
     }
   
     // set response code - 200 OK
     http_response_code(200);
   
-    // show districts data in json format
-    echo json_encode($wards_arr);
+    // show citizens data in json format
+    echo json_encode($vaccinations_arr);
 }
   
 else{
@@ -61,9 +63,9 @@ else{
     // set response code - 404 Not found
     http_response_code(404);
   
-    // tell the user no districts found
+    // tell the user no citizens found
     echo json_encode(
-        array("message" => "No districts found.")
+        array("message" => "No vaccinations found.")
     );
 }
 ?>

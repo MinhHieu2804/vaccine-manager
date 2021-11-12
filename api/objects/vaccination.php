@@ -191,7 +191,7 @@ class Vaccination
         $this->created = $row['created'];
     }
 
-    function read_with_cccd() {
+    function read_with_cccd($cccd) {
         $query = "SELECT
         v2.name as vaccine_name, v1.date, v1.note, v1.created, v1.vaccinate_no, h.name as center_name
     FROM
@@ -207,13 +207,36 @@ class Vaccination
         // prepare query statement
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(1, $this->cccd);
+        $stmt->bindParam(1, $cccd);
 
         // execute query
         $stmt->execute();
 
         return $stmt;
     }
+
+    // function read_with_citizen_id($citizen_id){
+        
+    //     // query to read single record
+    //     $query = "SELECT
+    //                 id, _name, _district_id, _province_id
+    //             FROM
+    //                 " . $this->table_name . " 
+    //             WHERE
+    //             _district_id = ?
+    //             ";
+
+    //     // prepare query statement
+    //     $stmt = $this->conn->prepare( $query );
+
+    //     // bind id of product to be updated
+    //     $stmt->bindParam(1, $citizen_id);
+
+    //     // execute query
+    //     $stmt->execute();
+    
+    //     return $stmt;
+    // }
 }
 
 
