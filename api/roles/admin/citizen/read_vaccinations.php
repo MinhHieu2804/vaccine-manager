@@ -40,6 +40,7 @@ if($num>0){
         extract($row);
   
         $vaccination_item=array(
+            "id" => $id,
             "vaccine" => $vaccine_name,
             "health_center" => $center_name,
             "date" => $date,
