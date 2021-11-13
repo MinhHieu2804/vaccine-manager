@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import { Statistic, Row, Col, Button } from 'antd';
+import { Statistic, Row, Col } from 'antd';
 import './home.css';
 import axios from 'axios';
 

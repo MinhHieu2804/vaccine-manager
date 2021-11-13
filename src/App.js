@@ -9,6 +9,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import Userpage from './features/UserPage/Userpage';
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/user">
+            <Userpage />
           </Route>
           <Route path="*">
             <Main />
