@@ -24,7 +24,7 @@ export default function Vaccinations() {
     }, [])
 
     const handleDelete = (id) => {
-        const URL = 'http://localhost/vaccine-manager/api/roles/admin/citizen/delete.php';
+        const URL = 'http://localhost/vaccine-manager/api/roles/admin/vaccination/delete_vaccination.php';
         axios.post(URL, { "id": id });
         setRows1(rows1.filter((rec) => rec.id !== id));
     };
@@ -36,8 +36,9 @@ export default function Vaccinations() {
         { field: 'ten', headerName: 'Tên', width: 170 },
         { field: 'vaccine_name', headerName: 'Tên vaccine', width: 170 },
         { field: 'date', headerName: 'Ngày tiêm', width: 170 },
+        { field: 'center_name', headerName: 'Cơ sở tiêm', width: 170 },
         { field: 'vaccinate_no', headerName: 'Mũi số', width: 170 },
-        { field: 'note', headerName: 'Ghi chú', width: 170, hide: true },
+        { field: 'note', headerName: 'Ghi chú', width: 170 },
         {
             field: 'action',
             headerName: 'Action',

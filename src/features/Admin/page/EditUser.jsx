@@ -25,7 +25,6 @@ export default function EditUser() {
     const handleChangeD = value => {
         axios.post('http://localhost/vaccine-manager/api/roles/admin/ward/read_with_district_id.php?district_id=' + value)
             .then(res => {
-                console.log(res);
                 const { records } = res.data;
                 setward(records);
             })

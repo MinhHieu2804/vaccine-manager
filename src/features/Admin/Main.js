@@ -9,6 +9,7 @@ import EditUser from "./page/EditUser";
 import Adduser from "./page/Adduser";
 import Vaccinations from "./page/Vaccinations";
 import EditVaccination from "./page/EditVaccination";
+import AddVaccination from "./page/AddVaccination";
 
 function Main() {
   return (
@@ -33,6 +34,9 @@ function Main() {
             </Route>
             <Route exact path="/vaccinations">
               <Vaccinations />
+            </Route>
+            <Route exact path="/addVaccination">
+              <AddVaccination />
             </Route>
             <Route exact path="/">
               <Home />
