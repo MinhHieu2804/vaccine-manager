@@ -4,11 +4,13 @@ import { Form, Input, Button, DatePicker, Select } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import { useParams } from 'react-router';
+import TextArea from 'rc-textarea';
 
 export default function EditVaccination() {
     const { Option } = Select;
     const vaccinationId = useParams();
     const [vaccine, setvaccine] = useState([]);
+    const [centers, setcenters] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccine/read.php')
@@ -18,10 +20,18 @@ export default function EditVaccination() {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get('http://localhost/vaccine-manager/api/roles/admin/health_center/read.php')
+            .then(res => {
+                const { records } = res.data;
+                setcenters(records);
+            })
+    }, [])
+
     const onFinish = (values) => {
         values = {
             ...values,
-            dateOfBirth: values.dateOfBirth._d.toLocaleDateString()
+            date: values.date._d.toLocaleDateString()
         }
         console.log('Success:', values);
     };
@@ -51,30 +61,6 @@ export default function EditVaccination() {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Họ & đệm"
-                        name="ho_dem"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng điền ô này',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Tên"
-                        name="ten"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng điền ô này',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
                         label="Số CMND"
                         name="cccd"
                         rules={[
@@ -97,6 +83,11 @@ export default function EditVaccination() {
                     >
                         <DatePicker />
                     </Form.Item >
+                    <Form.Item label="Cơ sở tiêm chủng" name='health_center_id'>
+                        <Select defaultValue='--chọn cơ sở--' style={{ width: 210 }}>
+                            {centers.map(p => <Option key={p.id}>{p.name}</Option>)}
+                        </Select>
+                    </Form.Item>
                     <Form.Item label="Loại Vaccine" name='vaccine_id'>
                         <Select defaultValue='--chọn loại vaccine--' style={{ width: 210 }}>
                             {vaccine.map(p => <Option key={p.id}>{p.name}</Option>)}
@@ -107,6 +98,9 @@ export default function EditVaccination() {
                             <Option value='1'>1</Option>
                             <Option value='2'>2</Option>
                         </Select>
+                    </Form.Item>
+                    <Form.Item label='Ghi chú' name='note'>
+                        <TextArea maxLength={100}></TextArea>
                     </Form.Item>
 
                     <Form.Item
