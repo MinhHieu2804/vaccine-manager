@@ -28,7 +28,7 @@ class Vaccination
 
         // select all query
         $query = "SELECT
-                    v1.id, v1.cccd, c.ho_dem, c.ten, v2.name as vaccine_name, v1.date, v1.note, v1.created, v1.vaccinate_no
+                    v1.id, v1.cccd, c.ho_dem, c.ten, v2.name as vaccine_name, h.name as center_name, v1.date, v1.note, v1.created, v1.vaccinate_no
                 FROM
                     " . $this->table_name . " v1
                     LEFT JOIN
@@ -37,6 +37,9 @@ class Vaccination
                     LEFT JOIN
                         citizen c
                             ON v1.cccd = c.cccd
+                    LEFT JOIN
+                        health_center h
+                            ON v1.health_center_id = h.id
                 ORDER BY
                     v1.created DESC";
 

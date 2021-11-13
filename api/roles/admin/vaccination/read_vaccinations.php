@@ -40,6 +40,7 @@ if ($num > 0) {
             "ho_dem" => $ho_dem,
             "ten" => $ten,
             "vaccine_name" => $vaccine_name,
+            "center_name" => $center_name,
             "date" => $date,
             "vaccinate_no" => $vaccinate_no,
             "note" => $note
