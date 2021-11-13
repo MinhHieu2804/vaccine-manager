@@ -193,7 +193,7 @@ class Vaccination
 
     function read_with_cccd($cccd) {
         $query = "SELECT
-        v2.name as vaccine_name, v1.date, v1.note, v1.created, v1.vaccinate_no, h.name as center_name
+        v1.id, v2.name as vaccine_name, v1.date, v1.note, v1.created, v1.vaccinate_no, h.name as center_name
     FROM
         " . $this->table_name . " v1
         LEFT JOIN
