@@ -11,6 +11,7 @@ export default function EditUser() {
     const [provinces, setprovinces] = useState([]);
     const [district, setdistrict] = useState([{ name: "Vui lòng chọn thành phố" }]);
     const [ward, setward] = useState([{ name: "Vui lòng chọn Quận/Huyện" }]);
+    const [user, setuser] = useState([])
 
     const handleChange = value => {
         axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + value)
@@ -38,6 +39,14 @@ export default function EditUser() {
             });
     }, [])
 
+    useEffect(() => {
+        axios.get('http://localhost/vaccine-manager/api/roles/admin/citizen/read_one.php?id=' + userID.userId)
+            .then(res => {
+                console.log(res.data);
+                setuser(res.data);
+            })
+    }, [userID])
+
 
 
     const onFinish = (values) => {
@@ -51,6 +60,11 @@ export default function EditUser() {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    console.log(user.ten);
+    // var name = user.ten;
+
+
     return (
         <div className="editUser">
             <h1>Edit User {userID.userId} </h1>
@@ -80,7 +94,7 @@ export default function EditUser() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input defaultValue={user.ten} />
                     </Form.Item>
                     <Form.Item
                         label="Tên"
@@ -92,7 +106,7 @@ export default function EditUser() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input placeholder={user.ten} />
                     </Form.Item>
                     <Form.Item
                         label="Số CMND"
@@ -116,13 +130,13 @@ export default function EditUser() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input placeholder={user.phone_number} />
                     </Form.Item>
                     <Form.Item
                         label="Email"
                         name="email"
                     >
-                        <Input />
+                        <Input placeholder={user.email} />
                     </Form.Item>
                     <Form.Item
                         label="Password"
@@ -138,8 +152,14 @@ export default function EditUser() {
                     </Form.Item>
                     <Form.Item label="Ngày sinh"
                         name="dateOfBirth"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng chọn ngày',
+                            }
+                        ]}
                     >
-                        <DatePicker />
+                        <DatePicker placeholder={user.birthday} />
                     </Form.Item >
                     <Form.Item label="Thành phố" name="province">
                         <Select defaultValue='--chọn thành phố--' style={{ width: 210 }} onChange={handleChange}>

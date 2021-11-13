@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./page/Home";
 import EditUser from "./page/EditUser";
 import Adduser from "./page/Adduser";
+import Vaccinations from "./page/Vaccinations";
+import EditVaccination from "./page/EditVaccination";
 
 function Main() {
   return (
@@ -25,6 +27,12 @@ function Main() {
             </Route>
             <Route exact path="/editUser/:userId">
               <EditUser />
+            </Route>
+            <Route exact path="/editVaccination/:id">
+              <EditVaccination />
+            </Route>
+            <Route exact path="/vaccinations">
+              <Vaccinations />
             </Route>
             <Route exact path="/">
               <Home />

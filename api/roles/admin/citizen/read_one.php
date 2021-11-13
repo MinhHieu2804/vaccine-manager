@@ -23,7 +23,7 @@ $citizen->id = isset($_GET['id']) ? $_GET['id'] : die();
 // read the details of citizen to be edited
 $citizen->readOne();
   
-if($citizen->cccd!=null){
+if($citizen->id!=null){
     // create array
     $citizen_arr = array(
         "cccd" => $citizen->cccd,
