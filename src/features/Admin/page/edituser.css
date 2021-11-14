@@ -17,3 +17,7 @@
 .updateBtn:hover {
     background: #0e9668 !important;
 }
+.alert {
+    position: relative;
+    left: 263px;
+}

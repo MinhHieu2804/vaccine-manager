@@ -51,7 +51,7 @@ export default function EditUser() {
     const onFinish = (values) => {
         values = {
             ...values,
-            dateOfBirth: values.dateOfBirth._d.toLocaleDateString()
+            dateOfBirth: values.dateOfBirth._d.toISOString()
         }
         console.log('Success:', values);
     };

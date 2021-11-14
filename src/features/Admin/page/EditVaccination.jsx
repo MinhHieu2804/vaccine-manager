@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './edituser.css';
-import { Form, Input, Button, DatePicker, Select } from 'antd';
+import { Form, Input, Button, DatePicker, Select, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import { useParams } from 'react-router';
@@ -11,6 +11,7 @@ export default function EditVaccination() {
     const vaccinationId = useParams();
     const [vaccine, setvaccine] = useState([]);
     const [centers, setcenters] = useState([]);
+    const [check, setcheck] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccine/read.php')
@@ -31,10 +32,10 @@ export default function EditVaccination() {
     const onFinish = (values) => {
         values = {
             ...values,
-            date: values.date._d.toLocaleDateString(),
+            date: values.date._d.toISOString(),
             id: vaccinationId.id
         }
-        console.log('Success:', values);
+        setcheck(true);
         axios.post('http://localhost/vaccine-manager/api/roles/admin/vaccination/update_vaccination.php', JSON.stringify(values))
             .then(res => {
                 console.log(res);
@@ -65,6 +66,7 @@ export default function EditVaccination() {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
+                    <Form.Item><Alert message="Update thành công!" type="success" style={{ display: check ? 'block' : 'none' }} className="alert" /></Form.Item>
                     <Form.Item
                         label="Số CMND"
                         name="cccd"

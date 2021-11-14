@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './edituser.css';
-import { Form, Input, Button, DatePicker, Select } from 'antd';
+import { Form, Input, Button, DatePicker, Select, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
 import { useParams } from 'react-router';
@@ -11,6 +11,7 @@ export default function AddVaccination() {
     const vaccinationId = useParams();
     const [vaccine, setvaccine] = useState([]);
     const [centers, setcenters] = useState([]);
+    const [check, setcheck] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccine/read.php')
@@ -31,10 +32,11 @@ export default function AddVaccination() {
     const onFinish = (values) => {
         values = {
             ...values,
-            date: values.date._d.toLocaleDateString()
+            date: values.date._d.toISOString()
         }
-        console.log('Success:', values);
-        axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccination/create_vaccination.php', { params: JSON.stringify(values) })
+        console.log('Success:', values.date);
+        setcheck(true);
+        axios.post('http://localhost/vaccine-manager/api/roles/admin/vaccination/create_vaccination.php', JSON.stringify(values))
             .then(res => {
                 console.log(res);
             })
@@ -64,9 +66,11 @@ export default function AddVaccination() {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >
+                    <Form.Item><Alert message="Thêm mới thành công!" type="success" style={{ display: check ? 'block' : 'none' }} className="alert" /></Form.Item>
                     <Form.Item
                         label="Số CMND"
                         name="cccd"
+                        type="number"
                         rules={[
                             {
                                 required: true,
@@ -128,7 +132,7 @@ export default function AddVaccination() {
                         </Select>
                     </Form.Item>
                     <Form.Item label='Ghi chú' name='note'>
-                        <TextArea maxLength={100} defaultValue={'as'}></TextArea>
+                        <TextArea maxLength={100}></TextArea>
                     </Form.Item>
 
                     <Form.Item
