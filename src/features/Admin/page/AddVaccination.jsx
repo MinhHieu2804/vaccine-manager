@@ -34,6 +34,10 @@ export default function AddVaccination() {
             date: values.date._d.toLocaleDateString()
         }
         console.log('Success:', values);
+        axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccination/create_vaccination.php', { params: JSON.stringify(values) })
+            .then(res => {
+                console.log(res);
+            })
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -83,24 +87,48 @@ export default function AddVaccination() {
                     >
                         <DatePicker />
                     </Form.Item >
-                    <Form.Item label="Cơ sở tiêm chủng" name='health_center_id'>
+                    <Form.Item label="Cơ sở tiêm chủng"
+                        name='health_center_id'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng chọn ngày',
+                            }
+                        ]}
+                    >
                         <Select defaultValue='--chọn cơ sở--' style={{ width: 210 }}>
                             {centers.map(p => <Option key={p.id}>{p.name}</Option>)}
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Loại Vaccine" name='vaccine_id'>
+                    <Form.Item label="Loại Vaccine"
+                        name='vaccine_id'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng chọn ngày',
+                            }
+                        ]}
+                    >
                         <Select defaultValue='--chọn loại vaccine--' style={{ width: 210 }}>
                             {vaccine.map(p => <Option key={p.id}>{p.name}</Option>)}
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Mũi tiêm số:" name='vaccinate_no'>
+                    <Form.Item label="Mũi tiêm số:"
+                        name='vaccinate_no'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng chọn ngày',
+                            }
+                        ]}
+                    >
                         <Select defaultValue='chọn mũi tiêm' style={{ width: 210 }}>
                             <Option value='1'>1</Option>
                             <Option value='2'>2</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item label='Ghi chú' name='note'>
-                        <TextArea maxLength={100}></TextArea>
+                        <TextArea maxLength={100} defaultValue={'as'}></TextArea>
                     </Form.Item>
 
                     <Form.Item
