@@ -23,11 +23,14 @@ function App() {
           <Route exact path="/signup">
             <SignUp />
           </Route>
-          <Route path="/user">
+          <Route path="/userPage">
             <Userpage />
           </Route>
-          <Route path="*">
+          <Route exact path="/">
             <Main />
+          </Route>
+          <Route path="*">
+            Not found
           </Route>
         </Switch>
       </Fragment>

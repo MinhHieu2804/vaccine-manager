@@ -42,7 +42,7 @@ function Main() {
               <Home />
             </Route>
             <Route exact path="*">
-              <Home />
+              404 Not found
             </Route>
           </Switch>
         </div>

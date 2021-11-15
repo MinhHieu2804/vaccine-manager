@@ -1,10 +1,19 @@
 import React from 'react'
 import Userheader from './Userheader'
+import UserSideBar from './UserSideBar'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-export default function Userpage() {
+function Userpage() {
     return (
-        <div>
-            <Userheader />
-        </div>
+        <Router>
+            <div className="userPage">
+                <Userheader />
+                <UserSideBar />
+                <Switch>
+                </Switch>
+            </div>
+        </Router>
     )
 }
+
+export default Userpage;
