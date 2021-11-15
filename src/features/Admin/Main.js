@@ -20,29 +20,26 @@ function Main() {
         <div className="mycontainer">
           <Sidebar />
           <Switch>
-            <Route exact path="/userList">
+            <Route exact path="/admin/userList">
               <UserList />
             </Route>
-            <Route exact path="/addUser">
+            <Route exact path="/admin/addUser">
               <Adduser />
             </Route>
-            <Route exact path="/editUser/:userId">
+            <Route exact path="/admin/editUser/:userId">
               <EditUser />
             </Route>
-            <Route exact path="/editVaccination/:id">
+            <Route exact path="/admin/editVaccination/:id">
               <EditVaccination />
             </Route>
-            <Route exact path="/vaccinations">
+            <Route exact path="/admin/vaccinations">
               <Vaccinations />
             </Route>
-            <Route exact path="/addVaccination">
+            <Route exact path="/admin/addVaccination">
               <AddVaccination />
             </Route>
-            <Route exact path="/">
+            <Route exact path="/admin">
               <Home />
-            </Route>
-            <Route exact path="*">
-              404 Not found
             </Route>
           </Switch>
         </div>

@@ -28,10 +28,10 @@ export default function UserSideBar() {
                 <div className="sideBarMenu">
                     <h3 className="sideBarTitle">DashBoard</h3>
                     <ul className="sideBarList">
-                        <Link to="" className="dirLink"><li id="1" className="sideBarListItem " onClick={(e) => liCkickFun(e)}><Reorder />Home</li></Link>
-                        <Link to='' className="dirLink"><li id='2' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><People />Users</li></Link>
-                        <Link to='' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Vaccinations</li></Link>
-                        <Link to='' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Add Vaccination</li></Link>
+                        <Link to='/userPage' className="dirLink"><li id="1" className="sideBarListItem " onClick={(e) => liCkickFun(e)}><Reorder />Home</li></Link>
+                        <Link to='/userPage/Info' className="dirLink"><li id='2' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><People />Users</li></Link>
+                        <Link to='/userPage' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Vaccinations</li></Link>
+                        <Link to='/userPage' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Add Vaccination</li></Link>
                     </ul>
                     <h3 className="sideBarTitle">Account</h3>
                     <ul className="sideBarList">

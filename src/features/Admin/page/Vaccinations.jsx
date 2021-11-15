@@ -47,7 +47,7 @@ export default function Vaccinations() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/editVaccination/" + params.row.id} className="dirLink">
+                        <Link to={"/admin/editVaccination/" + params.row.id} className="dirLink">
                             <Button className="editBtn">Edit</Button>
                         </Link>
                         <DeleteOutline className="deleteBtn" onClick={() => handleDelete(params.row.id)} />

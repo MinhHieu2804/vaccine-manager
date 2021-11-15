@@ -28,10 +28,10 @@ export default function Sidebar() {
                 <div className="sideBarMenu">
                     <h3 className="sideBarTitle">DashBoard</h3>
                     <ul className="sideBarList">
-                        <Link to="/" className="dirLink"><li id="1" className="sideBarListItem " onClick={(e) => liCkickFun(e)}><Reorder />Home</li></Link>
-                        <Link to='/userList' className="dirLink"><li id='2' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><People />Users</li></Link>
-                        <Link to='/vaccinations' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Vaccinations</li></Link>
-                        <Link to='/addVaccination' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Add Vaccination</li></Link>
+                        <Link to="/admin" className="dirLink"><li id="1" className="sideBarListItem " onClick={(e) => liCkickFun(e)}><Reorder />Home</li></Link>
+                        <Link to='/admin/userList' className="dirLink"><li id='2' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><People />Users</li></Link>
+                        <Link to='/admin/vaccinations' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Vaccinations</li></Link>
+                        <Link to='/admin/addVaccination' className="dirLink"><li id='3' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><PersonAdd />Add Vaccination</li></Link>
                     </ul>
                     <h3 className="sideBarTitle">Account</h3>
                     <ul className="sideBarList">

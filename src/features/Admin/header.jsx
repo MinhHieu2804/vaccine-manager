@@ -7,7 +7,7 @@ export default function Header() {
         <div className="header">
             <div className="headerWrapper">
                 <div className="topLeft">
-                    <Link to='/' className="dirLink"><span className="logo">Vaccine Manager</span></Link>
+                    <Link to='/admin' className="dirLink"><span className="logo">Vaccine Manager</span></Link>
                 </div>
                 <div className="topRight">
                     Admin

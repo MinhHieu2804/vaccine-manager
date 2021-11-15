@@ -19,7 +19,7 @@ function Login() {
                     <img src="https://img.freepik.com/free-vector/medications-first-aid-kit_24640-73830.jpg?size=338&ext=jpg" alt="aside"></img>
                 </div>
                 <div className="mainForm">
-                    <h1>Log In</h1>
+                    <h1>Log In </h1>
                     <Form
                         name="basic"
                         labelCol={{ span: 8 }}
