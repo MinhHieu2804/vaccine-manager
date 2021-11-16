@@ -8,27 +8,28 @@ header('Content-Type: application/json');
   
 // include database and object files
 include_once '../../../config/database.php';
-include_once '../../../objects/district.php';
+include_once '../../../objects/ward.php';
   
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
   
-// prepare district object
-$district = new District($db);
+// prepare ward object
+$ward = new Ward($db);
   
 // set ID property of record to read
-$district->id = isset($_GET['id']) ? $_GET['id'] : die();
+$ward->id = isset($_GET['id']) ? $_GET['id'] : die();
   
-// read the details of district to be edited
-$district->readOne();
+// read the details of ward to be edited
+$ward->readOne();
   
-if($district->name!=null){
+if($ward->id!=null){
     // create array
-    $district_arr = array(
-        "id" => $district->id,
-        "name" => $district->name,
-        "province_id" => $district->province_id
+    $ward_arr = array(
+        "id" => $ward->id,
+        "name" =>  $ward->name,
+        "district_id" => $ward->district_id,
+        "proivince_id" => $ward->province_id
   
     );
   
@@ -36,14 +37,14 @@ if($district->name!=null){
     http_response_code(200);
   
     // make it json format
-    echo json_encode($district_arr);
+    echo json_encode($ward_arr);
 }
   
 else{
     // set response code - 404 Not found
     http_response_code(404);
   
-    // tell the user district does not exist
-    echo json_encode(array("message" => "district does not exist."));
+    // tell the user ward does not exist
+    echo json_encode(array("message" => "ward does not exist."));
 }
 ?>

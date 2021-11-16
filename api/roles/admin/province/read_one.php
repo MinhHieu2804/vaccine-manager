@@ -8,27 +8,26 @@ header('Content-Type: application/json');
   
 // include database and object files
 include_once '../../../config/database.php';
-include_once '../../../objects/district.php';
+include_once '../../../objects/province.php';
   
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
   
-// prepare district object
-$district = new District($db);
+// prepare province object
+$province = new Province($db);
   
 // set ID property of record to read
-$district->id = isset($_GET['id']) ? $_GET['id'] : die();
+$province->id = isset($_GET['id']) ? $_GET['id'] : die();
   
-// read the details of district to be edited
-$district->readOne();
+// read the details of province to be edited
+$province->readOne();
   
-if($district->name!=null){
+if($province->id!=null){
     // create array
-    $district_arr = array(
-        "id" => $district->id,
-        "name" => $district->name,
-        "province_id" => $district->province_id
+    $province_arr = array(
+        "id" => $province->id,
+        "name" =>  $province->name,
   
     );
   
@@ -36,14 +35,14 @@ if($district->name!=null){
     http_response_code(200);
   
     // make it json format
-    echo json_encode($district_arr);
+    echo json_encode($province_arr);
 }
   
 else{
     // set response code - 404 Not found
     http_response_code(404);
   
-    // tell the user district does not exist
-    echo json_encode(array("message" => "district does not exist."));
+    // tell the user province does not exist
+    echo json_encode(array("message" => "province does not exist."));
 }
 ?>
