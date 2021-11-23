@@ -14,6 +14,7 @@ export default function EditUser() {
     const [user, setuser] = useState([])
     const [form] = Form.useForm();
     const [check, setcheck] = useState(false);
+    const [location, setlocation] = useState([])
 
     const handleChange = value => {
         axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + value)
@@ -45,8 +46,20 @@ export default function EditUser() {
             .then(res => {
                 console.log(res.data);
                 setuser(res.data);
+                axios.post('http://localhost/vaccine-manager/api/roles/admin/ward/read_one.php?id=' + res.data.ward_id)
+                    .then(res => {
+                        setlocation(res.data);
+                    })
             })
     }, [userID])
+
+    var pro = "";
+    var dis = "";
+    for (let i = 0; i < provinces.length; i++) {
+        if (provinces[i].key === location.province_id) {
+            pro = provinces[i].name;
+        }
+    }
 
     form.setFieldsValue({
         ho_dem: user.ho_dem,
@@ -54,7 +67,8 @@ export default function EditUser() {
         cccd: user.cccd,
         phone_number: user.phone_number,
         email: user.email,
-        ward_id: user.ward_id
+        //birthday: "0000-00-00",
+        ward_id: location.name
     });
 
 
@@ -166,21 +180,21 @@ export default function EditUser() {
                         <DatePicker />
                     </Form.Item >
                     <Form.Item label="Thành phố" name="province">
-                        <Select defaultValue='--chọn thành phố--' style={{ width: 210 }} onChange={handleChange}>
+                        <Select defaultValue={pro} style={{ width: 210 }} onChange={handleChange}>
                             {
                                 provinces.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
                         </Select>
                     </Form.Item>
                     <Form.Item label="Quận/Huyện" name='district' >
-                        <Select defaultValue='--chọn Quận huyện--' style={{ width: 210 }} onChange={handleChangeD}>
+                        <Select style={{ width: 210 }} onChange={handleChangeD}>
                             {
                                 district.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
                         </Select>
                     </Form.Item>
                     <Form.Item label="Xã" name='ward_id' id="wardField" >
-                        <Select defaultValue='--chọn Xã--' style={{ width: 210 }}>
+                        <Select style={{ width: 210 }}>
                             {
                                 ward.map(p => <Option key={p.id}>{p.name}</Option>)
                             }

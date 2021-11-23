@@ -1,34 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Component } from 'react'
 import * as React from 'react'
 import './usersideBar.css';
 import { Reorder, People, ExitToApp, LibraryBooks } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
-export default function UserSideBar() {
+export default class UserSideBar extends Component {
+    state = {};
 
-
-    const liCkickFun = (event) => {
-
+    handleLogout = () => {
+        window.location = 'http://localhost:3000/login';
+        localStorage.clear();
     }
 
-    return (
-        <div className="userSideBar">
-            <div className="sideBarWrapper">
-                <div className="sideBarMenu">
-                    <h3 className="sideBarTitle">DashBoard</h3>
-                    <ul className="sideBarList">
-                        <Link to='/userPage/home' className="dirLink"><li id="1" className="sideBarListItem " onClick={(e) => liCkickFun(e)}><Reorder />Home</li></Link>
-                        <Link to='/userPage/Info' className="dirLink"><li id='2' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><LibraryBooks />UserInfo</li></Link>
-                        <Link to='/userPage/Info' className="dirLink"><li id='2' className="sideBarListItem " onClick={(e) => liCkickFun(e)}><People />Vaccination Lookup</li></Link>
-                    </ul>
-                    <h3 className="sideBarTitle">Account</h3>
-                    <ul className="sideBarList">
-                        <li className="sideBarListItem"><ExitToApp />Sign out</li>
-                    </ul>
+    render() {
+        return (
+            <div className="userSideBar">
+                <div className="sideBarWrapper">
+                    <div className="sideBarMenu">
+                        <h3 className="sideBarTitle">DashBoard</h3>
+                        <ul className="sideBarList">
+                            <Link to='/userPage/home' className="dirLink"><li id="1" className="sideBarListItem " ><Reorder />Home</li></Link>
+                            <Link to='/userPage/Info' className="dirLink"><li id='2' className="sideBarListItem " ><LibraryBooks />UserInfo</li></Link>
+                            <Link to='/userPage/view' className="dirLink"><li id='2' className="sideBarListItem " ><People />Vaccination Lookup</li></Link>
+                        </ul>
+                        <h3 className="sideBarTitle">Account</h3>
+                        <ul className="sideBarList">
+                            <Link to='/login' className="dirLink" onClick={this.handleLogout}><li className="sideBarListItem" ><ExitToApp />Sign out</li></Link>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 

@@ -36,6 +36,7 @@ export default function AddVaccination() {
         }
         console.log('Success:', values.date);
         setcheck(true);
+        document.getElementById("addVaccineform").reset();
         axios.post('http://localhost/vaccine-manager/api/roles/admin/vaccination/create_vaccination.php', JSON.stringify(values))
             .then(res => {
                 console.log(res);
@@ -52,6 +53,7 @@ export default function AddVaccination() {
             <h1>Add Vaccination {vaccinationId.id} </h1>
             <div className="editorWrapper">
                 <Form
+                    id="addVaccineform"
                     name="basic"
                     labelCol={{
                         span: 8,
