@@ -38,7 +38,7 @@ export default class Userpage extends Component {
                         <div className="userPageMain">
                             <UserSideBar />
                             <Switch>
-                                <Route exact path="/userPage/home" component={() => <Home user={this.state.user} />} />
+                                <Route exact path="/userPage" component={() => <Home user={this.state.user} />} />
                                 <Route exact path="/userPage/view" component={() => <ViewVaccination user={this.state.user} />} />
                                 <Route exact path="/userPage/Info" component={() => <UserInfo user={this.state.user} />} />
                             </Switch>

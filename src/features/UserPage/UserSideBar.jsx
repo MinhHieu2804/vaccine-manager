@@ -20,7 +20,7 @@ export default class UserSideBar extends Component {
                     <div className="sideBarMenu">
                         <h3 className="sideBarTitle">DashBoard</h3>
                         <ul className="sideBarList">
-                            <Link to='/userPage/home' className="dirLink"><li id="1" className="sideBarListItem " ><Reorder />Home</li></Link>
+                            <Link to='/userPage' className="dirLink"><li id="1" className="sideBarListItem " ><Reorder />Home</li></Link>
                             <Link to='/userPage/Info' className="dirLink"><li id='2' className="sideBarListItem " ><LibraryBooks />UserInfo</li></Link>
                             <Link to='/userPage/view' className="dirLink"><li id='2' className="sideBarListItem " ><People />Vaccination Lookup</li></Link>
                         </ul>

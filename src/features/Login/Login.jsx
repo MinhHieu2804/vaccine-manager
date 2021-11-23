@@ -26,7 +26,7 @@ export default class Login extends Component {
                 // this.setState({
                 //     loggedIn: true
                 // });
-                window.location = 'http://localhost:3000/userPage/home';
+                window.location = 'http://localhost:3000/userPage';
             })
             .catch(function (error) {
                 console.log(error);
