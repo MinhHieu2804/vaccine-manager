@@ -46,6 +46,7 @@ if ($jwt) {
         $user->ho_dem = $data->ho_dem;
         $user->ten = $data->ten;
         $user->birthday = (isset($data->birthday) && $data->birthday != null ? $data->birthday : "");
+        $user->gender = $data->gender;
         $user->address = (isset($data->address) && $data->address != null ? $data->address : "");
         $user->ward_id = (isset($data->ward_id) && $data->ward_id != null ? $data->ward_id : "null");
         $user->phone_number = $data->phone_number;
@@ -66,6 +67,7 @@ if ($jwt) {
                     "ho_dem" => $user->ho_dem,
                     "ten" => $user->ten,
                     "birthday" => $user->birthday,
+                    "gender" => $user->gender,
                     "address" => $user->address,
                     "ward_id" => $user->ward_id,
                     "phone_number" => $user->phone_number,

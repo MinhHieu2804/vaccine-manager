@@ -35,6 +35,7 @@ if(
     $citizen->ho_dem = $data->ho_dem;
     $citizen->ten = $data->ten;
     $citizen->birthday = $data->birthday;
+    $citizen->gender = $data->gender;
     $citizen->phone_number = $data->phone_number;
     $citizen->email = $data->email;
     $citizen->address = $data->address;

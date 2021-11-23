@@ -12,6 +12,7 @@ class Citizen
     public $ho_dem;
     public $ten;
     public $birthday;
+    public $gender;
     public $phone_number;
     public $email;
     public $pwd;
@@ -70,7 +71,7 @@ class Citizen
     {
 
         // query to check if email exists
-        $query = "SELECT id, ho_dem, ten, pwd
+        $query = "SELECT id, cccd, ho_dem, ten, birthday, gender, email, pwd, address, ward_id
                 FROM " . $this->table_name . "
                 WHERE phone_number = ?
                 LIMIT 0,1";
@@ -98,9 +99,15 @@ class Citizen
 
             // assign values to object properties
             $this->id = $row['id'];
+            $this->cccd = $row['cccd'];
             $this->ho_dem = $row['ho_dem'];
             $this->ten = $row['ten'];
+            $this->birthday = $row['birthday'];
+            $this->gender = $row['gender'];
+            $this->email = $row['email'];
             $this->pwd = $row['pwd'];
+            $this->address = $row['address'];
+            $this->ward_id = $row['ward_id'];
 
             // return true because email exists in the database
             return true;
@@ -125,6 +132,7 @@ class Citizen
                 ho_dem = :ho_dem,
                 ten = :ten,
                 birthday = :birthday,
+                gender = :gender,
                 address = :address,
                 ward_id = :ward_id,
                 phone_number = :phone_number,
@@ -140,6 +148,7 @@ class Citizen
         $this->ho_dem = htmlspecialchars(strip_tags($this->ho_dem));
         $this->ten = htmlspecialchars(strip_tags($this->ten));
         $this->birthday = htmlspecialchars(strip_tags($this->birthday));
+        $this->gender = htmlspecialchars(strip_tags($this->gender));
         $this->address = htmlspecialchars(strip_tags($this->address));
         $this->ward_id = htmlspecialchars(strip_tags($this->ward_id));
         $this->phone_number = htmlspecialchars(strip_tags($this->phone_number));
@@ -150,6 +159,7 @@ class Citizen
         $stmt->bindParam(':ho_dem', $this->ho_dem);
         $stmt->bindParam(':ten', $this->ten);
         $stmt->bindParam(':birthday', $this->birthday);
+        $stmt->bindParam(':gender', $this->gender);
         $stmt->bindParam(':address', $this->address);
         $stmt->bindParam(':ward_id', $this->ward_id);
         $stmt->bindParam(':phone_number', $this->phone_number);
@@ -188,6 +198,7 @@ class Citizen
                 ho_dem = :ho_dem,
                 ten = :ten,
                 birthday = :birthday,
+                gender = :gender,
                 address = :address,
                 ward_id = :ward_id,
                 phone_number = :phone_number,
@@ -203,6 +214,7 @@ class Citizen
         $this->ho_dem = htmlspecialchars(strip_tags($this->ho_dem));
         $this->ten = htmlspecialchars(strip_tags($this->ten));
         $this->birthday = htmlspecialchars(strip_tags($this->birthday));
+        $this->gender = htmlspecialchars(strip_tags($this->gender));
         $this->address = htmlspecialchars(strip_tags($this->address));
         $this->ward_id = htmlspecialchars(strip_tags($this->ward_id));
         $this->phone_number = htmlspecialchars(strip_tags($this->phone_number));
@@ -213,6 +225,7 @@ class Citizen
         $stmt->bindParam(':ho_dem', $this->ho_dem);
         $stmt->bindParam(':ten', $this->ten);
         $stmt->bindParam(':birthday', $this->birthday);
+        $stmt->bindParam(':gender', $this->gender);
         $stmt->bindParam(':address', $this->address);
         $stmt->bindParam(':ward_id', $this->ward_id);
         $stmt->bindParam(':phone_number', $this->phone_number);
@@ -238,12 +251,11 @@ class Citizen
         return false;
     }
 
-    function read()
-    {
+    function read(){
 
         // select all query
         $query = "SELECT
-                    c.id, c.cccd, c.ho_dem, c.ten, c.birthday, c.phone_number, c.email, c.address,
+                    c.id, c.cccd, c.ho_dem, c.ten, c.birthday, c.gender, c.phone_number, c.email, c.address,
                     w._name as ward, d._name as district, p._name as province
                 FROM
                 " . $this->table_name . " as c
@@ -270,7 +282,7 @@ class Citizen
         
         // query to read single record
         $query = "SELECT
-                    cccd, ho_dem, ten, birthday, phone_number, email, address,
+                    cccd, ho_dem, ten, birthday, gender phone_number, email, address,
                     ward_id
                 FROM
                 " . $this->table_name . " 

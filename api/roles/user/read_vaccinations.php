@@ -39,10 +39,10 @@ if($jwt) {
         $vaccination = new Vaccination($db);
 
         // set cccd property of record to read
-        $vaccination->cccd = $decoded->data->cccd;
+        $user->cccd = $decoded->data->cccd;
 
         // read the details of vaccination to be edited
-        $stmt = $vaccination->read_with_cccd();
+        $stmt = $vaccination->read_with_cccd($user->cccd);
         $num = $stmt->rowCount();
 
         // check if more than 0 record found
@@ -66,8 +66,7 @@ if($jwt) {
                     "center_name" => $center_name,
                     "date" => $date,
                     "vaccinate_no" => $vaccinate_no,
-                    "note" => $note,
-                    "created" => $created
+                    "note" => $note
                 );
 
                 array_push($vaccinations_arr["records"], $vaccination_item);
