@@ -43,9 +43,16 @@ if($check_phone_number && password_verify($data->pwd, $user->pwd) ){
        "iss" => $issuer,
        "data" => array(
            "id" => $user->id,
+           "cccd" => $user->cccd,
            "ho_dem" => $user->ho_dem,
            "ten" => $user->ten,
-           "phone_number" => $user->phone_number
+           "birthday" => $user->birthday,
+           "gender" => $user->gender,
+           "phone_number" => $user->phone_number,
+           "email" => $user->email,
+           "address" => $user->address,
+           "ward_id" => $user->ward_id
+
        )
     );
  

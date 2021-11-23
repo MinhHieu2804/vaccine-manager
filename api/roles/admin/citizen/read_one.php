@@ -30,6 +30,7 @@ if($citizen->id!=null){
         "ho_dem" => $citizen->ho_dem,
         "ten" => $citizen->ten,
         "birthday" => $citizen->birthday,
+        "gender" => $citizen->gender,
         "phone_number" => $citizen->phone_number,
         "email" => $citizen->email,
         "address" => $citizen->address,
