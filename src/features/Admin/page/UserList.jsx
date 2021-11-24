@@ -13,6 +13,7 @@ export default function UserList() {
     useEffect(() => {
         axios.get('http://localhost/vaccine-manager/api/roles/admin/citizen/read.php')
             .then(res => {
+                console.log(res.data);
                 const { records } = res.data;
                 setRows1(records);
             })
@@ -32,6 +33,7 @@ export default function UserList() {
         { field: 'cccd', headerName: 'Số CMND', width: 150 },
         { field: 'ho_dem', headerName: 'Họ & đệm', width: 170 },
         { field: 'ten', headerName: 'Tên', width: 170 },
+        { field: 'gender', headerName: 'Giới tính', width: 170 },
         { field: 'email', headerName: 'Email', width: 170 },
         { field: 'birthday', headerName: 'Ngày sinh', width: 170 },
         { field: 'phone_number', headerName: 'Số điện thoại', width: 170 },
@@ -46,9 +48,9 @@ export default function UserList() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/admin/editUser/" + params.row.id} className="dirLink">
+                        {/* <Link to={"/admin/editUser/" + params.row.id} className="dirLink">
                             <Button className="editBtn">Edit</Button>
-                        </Link>
+                        </Link> */}
                         <DeleteOutline className="deleteBtn" onClick={() => handleDelete(params.row.id)} />
                     </>
                 )

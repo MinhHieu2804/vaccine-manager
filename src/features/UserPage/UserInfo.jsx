@@ -3,15 +3,13 @@ import './UserInfo.css';
 import { Form, Input, Button, DatePicker, Select, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import { useParams } from 'react-router';
+import moment from 'moment';
 
 export default function UserInfo(props) {
     const { Option } = Select;
-    const userID = useParams();
     const [provinces, setprovinces] = useState([]);
     const [district, setdistrict] = useState([{ name: "Vui lòng chọn thành phố" }]);
     const [ward, setward] = useState([{ name: "Vui lòng chọn Quận/Huyện" }]);
-    const [user, setuser] = useState([])
     const [form] = Form.useForm();
     const [check, setcheck] = useState(false);
     const [location, setlocation] = useState([])
@@ -41,33 +39,15 @@ export default function UserInfo(props) {
             });
     }, [])
 
-    useEffect(() => {
-        axios.get('http://localhost/vaccine-manager/api/roles/admin/citizen/read_one.php?id=' + userID.userId)
-            .then(res => {
-                console.log(res.data);
-                setuser(res.data);
-                axios.post('http://localhost/vaccine-manager/api/roles/admin/ward/read_one.php?id=' + res.data.ward_id)
-                    .then(res => {
-                        setlocation(res.data);
-                    })
-            })
-    }, [userID])
-
-    var pro = "";
-    var dis = "";
-    for (let i = 0; i < provinces.length; i++) {
-        if (provinces[i].key === location.province_id) {
-            pro = provinces[i].name;
-        }
-    }
 
     form.setFieldsValue({
         ho_dem: props.user.ho_dem,
         ten: props.user.ten,
-        cccd: props.user.id,
+        cccd: props.user.cccd,
         phone_number: props.user.phone_number,
-        email: user.email,
-        //birthday: "0000-00-00",
+        email: props.user.email,
+        gender: props.user.gender,
+        birthday: moment(props.user.birthday),
         ward_id: location.name
     });
 
@@ -77,14 +57,14 @@ export default function UserInfo(props) {
             ...values,
             birthday: values.birthday._d.toISOString(),
             address: "",
-            id: userID.userId
+            id: props.user.id
         }
         console.log('Success:', values);
         setcheck(true);
-        axios.post("http://localhost/vaccine-manager/api/roles/admin/citizen/update.php", JSON.stringify(values))
-            .then(res => {
-                console.log(res);
-            });
+        // axios.post("http://localhost/vaccine-manager/api/roles/admin/citizen/update.php", JSON.stringify(values))
+        //     .then(res => {
+        //         console.log(res);
+        //     });
 
     };
 
@@ -145,7 +125,7 @@ export default function UserInfo(props) {
                             {
                                 required: true,
                                 message: 'Vui lòng điền ô này',
-                            },
+                            }
                         ]}
                     >
                         <Input />
@@ -157,7 +137,7 @@ export default function UserInfo(props) {
                             {
                                 required: true,
                                 message: 'Vui lòng điền ô này',
-                            },
+                            }
                         ]}
                     >
                         <Input />
@@ -165,8 +145,26 @@ export default function UserInfo(props) {
                     <Form.Item
                         label="Email"
                         name="email"
+                        rules={[
+                            {
+                                type: "email",
+                                message: 'Không đúng định dạng email',
+                            },
+                        ]}
                     >
                         <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Password"
+                        name="pwd"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng điền ô này',
+                            },
+                        ]}
+                    >
+                        <Input.Password />
                     </Form.Item>
                     <Form.Item label="Ngày sinh"
                         name="birthday"
@@ -179,8 +177,17 @@ export default function UserInfo(props) {
                     >
                         <DatePicker />
                     </Form.Item >
+                    <Form.Item
+                        name='gender'
+                        label='Giới tính'>
+                        <Select style={{ width: 210 }}>
+                            <Option value='m'>Nam</Option>
+                            <Option value='f'>Nữ</Option>
+                            <Option value='d'>Others</Option>
+                        </Select>
+                    </Form.Item>
                     <Form.Item label="Thành phố" name="province">
-                        <Select defaultValue={pro} style={{ width: 210 }} onChange={handleChange}>
+                        <Select style={{ width: 210 }} onChange={handleChange}>
                             {
                                 provinces.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
