@@ -123,7 +123,7 @@ class Citizen
     {
 
         // if password needs to be updated
-        $password_set = !empty($this->pwd) ? " pwd = :pwd" : "";
+        $password_set = !empty($this->pwd) ? ", pwd = :pwd" : "";
 
         // if no posted password, do not update the password
         $query = "UPDATE " . $this->table_name . "
@@ -136,7 +136,7 @@ class Citizen
                 address = :address,
                 ward_id = :ward_id,
                 phone_number = :phone_number,
-                email = :email,
+                email = :email
                 {$password_set}
             WHERE id = :id";
 

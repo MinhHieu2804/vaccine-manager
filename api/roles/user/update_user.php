@@ -51,7 +51,7 @@ if ($jwt) {
         $user->ward_id = (isset($data->ward_id) && $data->ward_id != null ? $data->ward_id : "null");
         $user->phone_number = $data->phone_number;
         $user->email = (isset($data->email) && $data->email != null ? $data->email : "");
-        $user->pwd = $data->pwd;
+        $user->pwd = (isset($data->pwd) ? $data->pwd : null);
         $user->id = $decoded->data->id;
 
         // update the user record
@@ -107,7 +107,9 @@ if ($jwt) {
         // show error message
         echo json_encode(array(
             "message" => "Access denied.",
-            "error" => $e->getMessage()
+            "error" => $e->getMessage(),
+            $user->pwd,
+            $password_set = !empty($user->pwd) ? " pwd = :pwd" : ""
         ));
     }
 }
