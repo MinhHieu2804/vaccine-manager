@@ -14,6 +14,9 @@ export default function UserInfo(props) {
     const [check, setcheck] = useState(false);
     const [location, setlocation] = useState([])
 
+    console.log(props);
+
+
     const handleChange = value => {
         axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + value)
             .then(res => {
@@ -47,25 +50,26 @@ export default function UserInfo(props) {
         phone_number: props.user.phone_number,
         email: props.user.email,
         gender: props.user.gender,
+        pwd: "",
         birthday: moment(props.user.birthday),
         ward_id: location.name
     });
 
 
     const onFinish = (values) => {
+        props.onChange();
         values = {
             ...values,
             birthday: values.birthday._d.toISOString(),
             address: "",
-            id: props.user.id
+            jwt: localStorage.getItem('jwt')
         }
         console.log('Success:', values);
         setcheck(true);
-        // axios.post("http://localhost/vaccine-manager/api/roles/admin/citizen/update.php", JSON.stringify(values))
-        //     .then(res => {
-        //         console.log(res);
-        //     });
-
+        axios.post("http://localhost/vaccine-manager/api/roles/user/update_user.php", JSON.stringify(values))
+            .then(res => {
+                console.log(res);
+            });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -157,12 +161,6 @@ export default function UserInfo(props) {
                     <Form.Item
                         label="Password"
                         name="pwd"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Vui lòng điền ô này',
-                            },
-                        ]}
                     >
                         <Input.Password />
                     </Form.Item>

@@ -3,7 +3,7 @@ import './edituser.css';
 import { Form, Input, Button, DatePicker, Select, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 export default function EditUser() {
     const { Option } = Select;

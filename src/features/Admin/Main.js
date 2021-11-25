@@ -29,7 +29,7 @@ function Main() {
             <Route exact path="/admin/editUser/:userId">
               <EditUser />
             </Route>
-            <Route exact path="/admin/editVaccination/:id">
+            <Route exact path="/admin/editVaccination/:vacId">
               <EditVaccination />
             </Route>
             <Route exact path="/admin/vaccinations">

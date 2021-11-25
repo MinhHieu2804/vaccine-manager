@@ -9,10 +9,15 @@ import ViewVaccination from './ViewVaccination';
 import UserInfo from './UserInfo';
 
 export default class Userpage extends Component {
-    state = {};
+
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+
 
     componentWillMount() {
-        console.log(localStorage.getItem('jwt'));
         const config = {
             jwt: localStorage.getItem('jwt')
         }
@@ -29,6 +34,10 @@ export default class Userpage extends Component {
             )
     }
 
+    handleUserChange = (d) => {
+        this.setState({ user: d })
+    }
+
     render() {
         if (this.state.user) {
             return (
@@ -40,7 +49,7 @@ export default class Userpage extends Component {
                             <Switch>
                                 <Route exact path="/userPage" component={() => <Home user={this.state.user} />} />
                                 <Route exact path="/userPage/view" component={() => <ViewVaccination user={this.state.user} />} />
-                                <Route exact path="/userPage/Info" component={() => <UserInfo user={this.state.user} />} />
+                                <Route exact path="/userPage/Info" component={() => <UserInfo user={this.state.user} onChange={() => this.componentDidCatch} />} />
                             </Switch>
                         </div>
                     </div>

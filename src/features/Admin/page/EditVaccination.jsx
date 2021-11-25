@@ -3,15 +3,19 @@ import './edituser.css';
 import { Form, Input, Button, DatePicker, Select, Alert } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import TextArea from 'rc-textarea';
+import moment from 'moment'
 
 export default function EditVaccination() {
     const { Option } = Select;
-    const vaccinationId = useParams();
+    const { vacId } = useParams();
     const [vaccine, setvaccine] = useState([]);
     const [centers, setcenters] = useState([]);
     const [check, setcheck] = useState(false);
+    const [vaccination, setvaccination] = useState({});
+    const [form] = Form.useForm();
+
 
     useEffect(() => {
         axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccine/read.php')
@@ -29,14 +33,34 @@ export default function EditVaccination() {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get('http://localhost/vaccine-manager/api/roles/admin/vaccination/read_one_vaccination.php?id=' + vacId)
+            .then(res => {
+                setvaccination(res.data);
+            },
+                err => {
+                    console.log(err);
+                })
+    }, [])
+
+    form.setFieldsValue({
+        cccd: vaccination.cccd,
+        date: moment(vaccination.date),
+        note: vaccination.note,
+        health_center_id: vaccination.health_center_id,
+        vaccine_id: vaccination.vaccine_id,
+        vaccinate_no: vaccination.vaccinate_no
+    });
+
 
     const onFinish = (values) => {
         values = {
             ...values,
             date: values.date._d.toISOString(),
-            id: vaccinationId.id
+            id: vacId
         }
         setcheck(true);
+        console.log(values);
         axios.post('http://localhost/vaccine-manager/api/roles/admin/vaccination/update_vaccination.php', JSON.stringify(values))
             .then(res => {
                 console.log(res);
@@ -50,7 +74,7 @@ export default function EditVaccination() {
 
     return (
         <div className="editUser">
-            <h1>Edit Vaccination {vaccinationId.id} </h1>
+            <h1>Edit Vaccination {vacId}</h1>
             <div className="editorWrapper">
                 <Form
                     name="basic"
@@ -66,6 +90,7 @@ export default function EditVaccination() {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
+                    form={form}
                 >
                     <Form.Item><Alert message="Update thành công!" type="success" style={{ display: check ? 'block' : 'none' }} className="alert" /></Form.Item>
                     <Form.Item

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import './viewVaccination.css';
 import { DeleteOutline } from '@material-ui/icons';
@@ -10,16 +10,30 @@ function ViewVaccination(props) {
 
     const [rows, setrows] = useState([])
 
+    useEffect(() => {
+        var data = {
+            jwt: localStorage.getItem('jwt'),
+            cccd: props.user.cccd
+        }
+        console.log(JSON.stringify(data));
+        axios.post('http://localhost/vaccine-manager/api/roles/user/read_vaccinations.php', JSON.stringify(data))
+            .then(res => {
+                console.log(res.data);
+                const { records } = res.data;
+                setrows(records);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [])
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 90, hide: true },
-        { field: 'cccd', headerName: 'Số CMND', width: 150 },
-        { field: 'ho_dem', headerName: 'Họ & đệm', width: 170 },
-        { field: 'ten', headerName: 'Tên', width: 170 },
-        { field: 'vaccine_name', headerName: 'Tên vaccine', width: 170 },
-        { field: 'date', headerName: 'Ngày tiêm', width: 170 },
-        { field: 'center_name', headerName: 'Cơ sở tiêm', width: 170 },
-        { field: 'vaccinate_no', headerName: 'Mũi số', width: 170 },
-        { field: 'note', headerName: 'Ghi chú', width: 170 },
+        { field: 'vaccine_name', headerName: 'Tên vaccine', width: 200 },
+        { field: 'vaccinate_no', headerName: 'Mũi số', width: 200 },
+        { field: 'date', headerName: 'Ngày tiêm', width: 200 },
+        { field: 'center_name', headerName: 'Cơ sở tiêm', width: 200 },
+        { field: 'note', headerName: 'Ghi chú', width: 300 },
     ];
 
     return (
