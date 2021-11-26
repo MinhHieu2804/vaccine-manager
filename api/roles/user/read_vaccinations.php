@@ -62,6 +62,7 @@ if($jwt) {
                 extract($row);
 
                 $vaccination_item = array(
+                    "id" => $id,
                     "vaccine_name" => $vaccine_name,
                     "center_name" => $center_name,
                     "date" => $date,
