@@ -10,6 +10,7 @@ import {
   Switch
 } from 'react-router-dom';
 import Userpage from './features/UserPage/Userpage';
+import LoginAdmin from './features/LoginAdmin/LoginAdmin';
 
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
       <Switch>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/loginAdmin">
+          <LoginAdmin />
         </Route>
         <Route exact path="/signup">
           <SignUp />

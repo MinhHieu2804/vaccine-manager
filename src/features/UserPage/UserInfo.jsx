@@ -19,8 +19,7 @@ export default function UserInfo(props) {
 
     const handleChange = value => {
         axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + value)
-            .then(res => {
-                console.log(res);
+            .then(function (res) {
                 const { records } = res.data;
                 setdistrict(records);
             })
@@ -50,24 +49,25 @@ export default function UserInfo(props) {
         email: props.user.email,
         gender: props.user.gender,
         pwd: "",
-        birthday: moment(props.user.birthday),
-        ward_id: location.name
+        birthday: moment(props.user.birthday)
     });
 
 
     const onFinish = (values) => {
-        props.onChange();
-        values = {
+        let values2 = {
             ...values,
             birthday: values.birthday._d.toISOString(),
             address: "",
             jwt: localStorage.getItem('jwt')
         }
-        console.log('Success:', values);
+        console.log('Success:', values2);
         setcheck(true);
-        axios.post("http://localhost/vaccine-manager/api/roles/user/update_user.php", JSON.stringify(values))
-            .then(res => {
+        axios.post("http://localhost/vaccine-manager/api/roles/user/update_user.php", JSON.stringify(values2))
+            .then(function (res) {
+                localStorage.setItem("jwt", res.data.jwt)
                 console.log(res);
+                console.log(props)
+                props.action(values);
             });
     };
 
@@ -184,21 +184,21 @@ export default function UserInfo(props) {
                         </Select>
                     </Form.Item>
                     <Form.Item label="Thành phố" name="province">
-                        <Select style={{ width: 210 }} onChange={handleChange}>
+                        <Select defaultValue='-Chọn thành phố-' style={{ width: 210 }} onChange={handleChange}>
                             {
                                 provinces.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
                         </Select>
                     </Form.Item>
                     <Form.Item label="Quận/Huyện" name='district' >
-                        <Select style={{ width: 210 }} onChange={handleChangeD}>
+                        <Select defaultValue='-Chọn quận huyện-' style={{ width: 210 }} onChange={handleChangeD}>
                             {
                                 district.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
                         </Select>
                     </Form.Item>
                     <Form.Item label="Xã" name='ward_id' id="wardField" >
-                        <Select style={{ width: 210 }}>
+                        <Select defaultValue='-Chọn xã-' style={{ width: 210 }}>
                             {
                                 ward.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
@@ -210,7 +210,7 @@ export default function UserInfo(props) {
                             span: 16,
                         }}
                     >
-                        <Button type="primary" htmlType="submit" className="updateBtn">
+                        <Button type="primary" htmlType="submit" className="updateBtn" >
                             Apply
                         </Button>
                     </Form.Item>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import Userheader from './Userheader'
 import UserSideBar from './UserSideBar'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -13,11 +13,10 @@ export default class Userpage extends Component {
     constructor(props) {
         super(props);
         this.state = {}
+        this.handlesetState = this.handlesetState.bind(this)
     }
 
-
-
-    componentWillMount() {
+    componentDidMount() {
         const config = {
             jwt: localStorage.getItem('jwt')
         }
@@ -34,8 +33,31 @@ export default class Userpage extends Component {
             )
     }
 
-    handleUserChange = (d) => {
-        this.setState({ user: d })
+    componentDidUpdate(pevProps, state) {
+        const config = {
+            jwt: localStorage.getItem('jwt')
+        }
+        axios.post('http://localhost/vaccine-manager/api/roles/user/validate_token.php', JSON.stringify(config))
+            .then(res => {
+                console.log({ a: res.data.data, b: this.state.user })
+                if (JSON.stringify(res.data.data) !== JSON.stringify(this.state.user)) {
+                    this.setState({
+                        user: res.data.data
+                    });
+                }
+
+            },
+                err => {
+                    console.log(err);
+                }
+            )
+    }
+
+    handlesetState(data) {
+        this.setState({
+            user: data
+        })
+        console.log(data);
     }
 
     render() {
@@ -49,7 +71,7 @@ export default class Userpage extends Component {
                             <Switch>
                                 <Route exact path="/userPage" component={() => <Home user={this.state.user} />} />
                                 <Route exact path="/userPage/view" component={() => <ViewVaccination user={this.state.user} />} />
-                                <Route exact path="/userPage/Info" component={() => <UserInfo user={this.state.user} onChange={() => this.componentDidCatch} />} />
+                                <Route exact path="/userPage/Info" component={() => <UserInfo user={this.state.user} action={this.handlesetState} />} />
                             </Switch>
                         </div>
                     </div>
