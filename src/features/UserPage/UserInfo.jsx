@@ -42,7 +42,6 @@ export default function UserInfo(props) {
             });
     }, [])
 
-
     form.setFieldsValue({
         ho_dem: props.user.ho_dem,
         ten: props.user.ten,
@@ -144,7 +143,7 @@ export default function UserInfo(props) {
                             }
                         ]}
                     >
-                        <Input />
+                        <Input pattern="(\+84|0)+(3[2-9]|5[6|8|9]|9\d(?!5)|8[1-9]|7[0|6-9])+([0-9]{7})" />
                     </Form.Item>
                     <Form.Item
                         label="Email"

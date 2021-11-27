@@ -64,7 +64,7 @@ export default class Login extends Component {
                                 name="phone_number"
                                 rules={[{ required: true, message: 'Please input your phone number!' }]}
                             >
-                                <Input />
+                                <Input pattern="(\+84|0)+(3[2-9]|5[6|8|9]|9\d(?!5)|8[1-9]|7[0|6-9])+([0-9]{7})" />
                             </Form.Item>
                             <Form.Item
                                 label="Password"
