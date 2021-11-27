@@ -62,7 +62,11 @@ if($jwt) {
                 extract($row);
 
                 $vaccination_item = array(
+<<<<<<< HEAD
                     "id"=>$id,
+=======
+                    "id" => $id,
+>>>>>>> origin/api2
                     "vaccine_name" => $vaccine_name,
                     "center_name" => $center_name,
                     "date" => $date,

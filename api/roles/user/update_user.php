@@ -109,7 +109,7 @@ if ($jwt) {
             "message" => "Access denied.",
             "error" => $e->getMessage(),
             $user->pwd,
-            $password_set = !empty($user->pwd) ? " pwd = :pwd" : ""
+            $password_set = !empty($user->pwd) ? ", pwd = :pwd" : ""
         ));
     }
 }

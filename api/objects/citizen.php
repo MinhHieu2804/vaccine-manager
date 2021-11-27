@@ -282,7 +282,7 @@ class Citizen
         
         // query to read single record
         $query = "SELECT
-                    cccd, ho_dem, ten, birthday, gender phone_number, email, address,
+                    cccd, ho_dem, ten, birthday, gender, phone_number, email, address,
                     ward_id
                 FROM
                 " . $this->table_name . " 
@@ -308,6 +308,7 @@ class Citizen
         $this->ho_dem = $row['ho_dem'];
         $this->ten = $row['ten'];
         $this->birthday = $row['birthday'];
+        $this->gender = $row['gender'];
         $this->phone_number = $row['phone_number'];
         $this->email = $row['email'];
         $this->address = $row['address'];
