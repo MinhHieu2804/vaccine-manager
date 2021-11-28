@@ -12,12 +12,22 @@ export default function UserInfo(props) {
     const [ward, setward] = useState([{ name: "Vui lòng chọn Quận/Huyện" }]);
     const [form] = Form.useForm();
     const [check, setcheck] = useState(false);
-    const [location, setlocation] = useState([])
+    const [selectedProvince, setSelectedProvince] = useState({
+        "id": null,
+        "name": ""
+    })
+    const [selectedDistrict, setSelectedDistrict] = useState({
+        "id": null,
+        "name": "-Chọn thành phố-"
+    })
+    const [selectedWard, setSelectedWard] = useState({
+        "id": null,
+        "name": "-Chọn thành quan huyen-"
+    })
+    const [location, setlocation] = useState({})
 
-    console.log(props);
-
-
-    const handleChange = value => {
+    function handleChange(value) {
+        setSelectedProvince(value);
         axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + value)
             .then(function (res) {
                 const { records } = res.data;
@@ -26,6 +36,7 @@ export default function UserInfo(props) {
     }
 
     const handleChangeD = value => {
+        setSelectedDistrict(value);
         axios.post('http://localhost/vaccine-manager/api/roles/admin/ward/read_with_district_id.php?district_id=' + value)
             .then(res => {
                 const { records } = res.data;
@@ -34,12 +45,50 @@ export default function UserInfo(props) {
     }
 
     useEffect(() => {
-        axios.get('http://localhost/vaccine-manager/api/roles/admin/province/read.php')
-            .then(res => {
-                const { records } = res.data;
-                setprovinces(records);
-            });
-    }, [])
+        // axios.get('http://localhost/vaccine-manager/api/roles/admin/province/read.php')
+        //     .then(function (res) {
+        //         const { records } = res.data;
+        //         setprovinces(records);
+        //         axios.get('http://localhost/vaccine-manager/api/roles/admin/ward/read_one.php?id=' + props.user.ward_id)
+        //             .then(function (res) {
+        //                 console.log(res);
+        //                 setlocation(res.data);
+        //                 if (res.data.name) {
+        //                     fetchinitialLocation();
+        //                 }
+        //             })
+        //     });
+        async function fetchData() {
+            let [provinces, loca] = await Promise.all([axios.get('http://localhost/vaccine-manager/api/roles/admin/province/read.php'),
+            axios.get('http://localhost/vaccine-manager/api/roles/admin/ward/read_one.php?id=' + props.user.ward_id)
+            ]);
+            await setprovinces(provinces.data.records);
+            await setlocation(loca.data);
+            if (loca.data.name) {
+                await fetchinitialLocation();
+            }
+            setSelectedWard(loca.data);
+        }
+
+        fetchData()
+    }, [location.id])
+
+    async function fetchinitialLocation() {
+        if (location.proivince_id && location.district_id) {
+            let promises = [
+                axios.get('http://localhost/vaccine-manager/api/roles/admin/province/read_one.php?id=' + location.proivince_id),
+                axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + location.proivince_id),
+                axios.get('http://localhost/vaccine-manager/api/roles/admin/district/read_one.php?id=' + location.district_id),
+                axios.post('http://localhost/vaccine-manager/api/roles/admin/ward/read_with_district_id.php?district_id=' + location.district_id)
+            ];
+            const [p1, p2, p3, p4] = await Promise.all(promises);
+            setSelectedProvince(p1.data);
+            setdistrict(p2.data.records);
+            setSelectedDistrict(p3.data);
+            setward(p4.data.records);
+
+        }
+    }
 
     form.setFieldsValue({
         ho_dem: props.user.ho_dem,
@@ -49,7 +98,10 @@ export default function UserInfo(props) {
         email: props.user.email,
         gender: props.user.gender,
         pwd: "",
-        birthday: moment(props.user.birthday)
+        province_id: selectedProvince.id,
+        district_id: selectedDistrict.id,
+        ward_id: selectedWard.id,
+        birthday: (props.user.birthday) ? moment(props.user.birthday) : null
     });
 
 
@@ -74,7 +126,6 @@ export default function UserInfo(props) {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
 
     return (
         <div className="editUser">
@@ -183,22 +234,22 @@ export default function UserInfo(props) {
                             <Option value='d'>Others</Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Thành phố" name="province">
-                        <Select defaultValue='-Chọn thành phố-' style={{ width: 210 }} onChange={handleChange}>
+                    <Form.Item label="Thành phố" name="province_id">
+                        <Select style={{ width: 210 }} onChange={handleChange}>
                             {
                                 provinces.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Quận/Huyện" name='district' >
-                        <Select defaultValue='-Chọn quận huyện-' style={{ width: 210 }} onChange={handleChangeD}>
+                    <Form.Item label="Quận/Huyện" name='district_id' >
+                        <Select style={{ width: 210 }} onChange={handleChangeD}>
                             {
                                 district.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
                         </Select>
                     </Form.Item>
-                    <Form.Item label="Xã" name='ward_id' id="wardField" >
-                        <Select defaultValue='-Chọn xã-' style={{ width: 210 }}>
+                    <Form.Item label="Xã" name='ward_id'  >
+                        <Select style={{ width: 210 }}>
                             {
                                 ward.map(p => <Option key={p.id}>{p.name}</Option>)
                             }

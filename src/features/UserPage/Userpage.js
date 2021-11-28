@@ -25,7 +25,7 @@ export default class Userpage extends Component {
                 this.setState({
                     user: res.data.data
                 });
-                console.log(res.data.data);
+                console.log(this.state.user);
             },
                 err => {
                     console.log(err);
@@ -39,7 +39,6 @@ export default class Userpage extends Component {
         }
         axios.post('http://localhost/vaccine-manager/api/roles/user/validate_token.php', JSON.stringify(config))
             .then(res => {
-                console.log({ a: res.data.data, b: this.state.user })
                 if (JSON.stringify(res.data.data) !== JSON.stringify(this.state.user)) {
                     this.setState({
                         user: res.data.data

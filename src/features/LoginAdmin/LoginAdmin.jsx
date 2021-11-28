@@ -14,7 +14,7 @@ export default class LoginAdmin extends Component {
 
         var config = {
             method: 'post',
-            url: 'http://localhost/vaccine-manager/api/roles/user/login.php',
+            url: 'http://localhost/vaccine-manager/api/roles/admin/auth/login.php',
             headers: {
                 'Content-Type': 'text/plain'
             },
@@ -23,13 +23,11 @@ export default class LoginAdmin extends Component {
         axios(config)
             .then(function (response) {
                 localStorage.setItem('jwt', response.data.jwt);
-                // this.setState({
-                //     loggedIn: true
-                // });
-                window.location = 'http://localhost:3000/userPage';
+                window.location = 'http://localhost:3000/admin';
             })
             .catch(function (error) {
                 console.log(error);
+                alert('Thông tin đăng nhập không đúng');
             });
     };
 
@@ -78,11 +76,11 @@ export default class LoginAdmin extends Component {
                                     Log in
                                 </Button>
                             </Form.Item>
-                            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                            {/* <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                                 <div className="signUpLink">
                                     <Link to='/signup'>Sign Up</Link>
                                 </div>
-                            </Form.Item>
+                            </Form.Item> */}
                         </Form>
                     </div>
                 </div>

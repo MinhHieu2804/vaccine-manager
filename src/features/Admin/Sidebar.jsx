@@ -22,6 +22,11 @@ export default function Sidebar() {
         localStorage.setItem('store', event.target.id);
     }
 
+    const handleLogout = () => {
+        window.location = 'http://localhost:3000/login';
+        localStorage.clear();
+    }
+
     return (
         <div className="sidebar">
             <div className="sideBarWrapper">
@@ -35,7 +40,7 @@ export default function Sidebar() {
                     </ul>
                     <h3 className="sideBarTitle">Account</h3>
                     <ul className="sideBarList">
-                        <li className="sideBarListItem"><ExitToApp />Sign out</li>
+                        <Link to='/login' className="dirLink" onClick={handleLogout}><li className="sideBarListItem"><ExitToApp />Sign out</li></Link>
                     </ul>
                 </div>
             </div>

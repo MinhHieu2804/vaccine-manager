@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../Login/Login.css';
 import { Form, Input, Button } from 'antd';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -30,6 +30,7 @@ export default class Login extends Component {
             })
             .catch(function (error) {
                 console.log(error);
+                alert('Nhập sai số điện thoại hoặc mật khẩu');
             });
     };
 
