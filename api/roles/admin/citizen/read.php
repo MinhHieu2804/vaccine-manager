@@ -40,7 +40,7 @@ if($num>0){
             "ho_dem" => $ho_dem,
             "ten" => $ten,
             "birthday" => $birthday,
-            "gender" => $gender,
+            "gender" => ($gender == 'm' ? "Nam" : ($gender == 'f' ? "Nữ" : "Khác")),
             "phone_number" => $phone_number,
             "email" => $email,
             "address" => $address,

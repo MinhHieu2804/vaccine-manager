@@ -103,7 +103,7 @@ class Citizen
             $this->ho_dem = $row['ho_dem'];
             $this->ten = $row['ten'];
             $this->birthday = $row['birthday'];
-            $this->gender = $row['gender'];
+            $this->gender = ($row['gender'] == 'm' ? "Nam" : ($row['gender'] == 'f' ? "Nữ" : "Khác"));
             $this->email = $row['email'];
             $this->pwd = $row['pwd'];
             $this->address = $row['address'];
@@ -148,18 +148,30 @@ class Citizen
         $this->ho_dem = htmlspecialchars(strip_tags($this->ho_dem));
         $this->ten = htmlspecialchars(strip_tags($this->ten));
         $this->birthday = htmlspecialchars(strip_tags($this->birthday));
-        $this->gender = htmlspecialchars(strip_tags($this->gender));
         $this->address = htmlspecialchars(strip_tags($this->address));
         $this->ward_id = htmlspecialchars(strip_tags($this->ward_id));
         $this->phone_number = htmlspecialchars(strip_tags($this->phone_number));
         $this->email = htmlspecialchars(strip_tags($this->email));
+
+        if ($this->gender == 'nam' || $this->gender == 'Nam' || $this->gender == 'Male') {
+            $newGender = 'm';
+            $this->gender = 'Nam';
+        } elseif ($this->gender == 'nữ' || $this->gender == 'Nữ' || $this->gender == 'Female') {
+                $newGender = 'f';
+                $this->gender = 'Nữ';
+        } else { 
+            $newGender = 'd';
+            $this->gender = 'Khác';
+        }
+
+        $newGender = htmlspecialchars(strip_tags($newGender));
 
         // bind the values from the form
         $stmt->bindParam(':cccd', $this->cccd);
         $stmt->bindParam(':ho_dem', $this->ho_dem);
         $stmt->bindParam(':ten', $this->ten);
         $stmt->bindParam(':birthday', $this->birthday);
-        $stmt->bindParam(':gender', $this->gender);
+        $stmt->bindParam(':gender', $newGender);
         $stmt->bindParam(':address', $this->address);
         $stmt->bindParam(':ward_id', $this->ward_id);
         $stmt->bindParam(':phone_number', $this->phone_number);
@@ -308,7 +320,7 @@ class Citizen
         $this->ho_dem = $row['ho_dem'];
         $this->ten = $row['ten'];
         $this->birthday = $row['birthday'];
-        $this->gender = $row['gender'];
+        $this->gender = ($row['gender'] == 'm' ? "Nam" : ($row['gender'] == 'f' ? "Nữ" : "Khác"));
         $this->phone_number = $row['phone_number'];
         $this->email = $row['email'];
         $this->address = $row['address'];
