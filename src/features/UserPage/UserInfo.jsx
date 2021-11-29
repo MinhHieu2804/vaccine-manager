@@ -212,7 +212,8 @@ export default function UserInfo(props) {
                         label="Password"
                         name="pwd"
                     >
-                        <Input.Password />
+                        <Input.Password pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                            title="Mật khẩu cần có ít nhất 8 ký tự gồm chữ hoa chữ thường và số!" />
                     </Form.Item>
                     <Form.Item label="Ngày sinh"
                         name="birthday"

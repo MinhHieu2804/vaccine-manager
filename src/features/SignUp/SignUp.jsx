@@ -12,7 +12,18 @@ function SignUp() {
     const onFinish = (values) => {
         const URL = 'http://localhost/vaccine-manager/api/roles/user/create_user.php';
         axios.post(URL, JSON.stringify(values))
-        setCheck(true);
+            .then(res => {
+                console.log(res);
+                if (res.data.message === "User was created.") {
+                    setCheck(true);
+                }
+                else {
+                    alert("Số điện thoại đã được đăng ký!")
+                }
+            },
+                err => {
+                    console.log(err);
+                })
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -65,7 +76,8 @@ function SignUp() {
                             name="pwd"
                             rules={[{ required: true, message: 'Please input your password!' }]}
                         >
-                            <Input.Password />
+                            <Input.Password pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                                title="Mật khẩu cần có ít nhất 8 ký tự gồm chữ hoa chữ thường và số!" />
                         </Form.Item>
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                             <Button type="primary" htmlType="submit" className="loginBtn">
