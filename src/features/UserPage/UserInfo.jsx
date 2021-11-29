@@ -14,7 +14,7 @@ export default function UserInfo(props) {
     const [check, setcheck] = useState(false);
     const [selectedProvince, setSelectedProvince] = useState({
         "id": null,
-        "name": ""
+        "name": "-Chọn thành phố-"
     })
     const [selectedDistrict, setSelectedDistrict] = useState({
         "id": null,
@@ -27,7 +27,9 @@ export default function UserInfo(props) {
     const [location, setlocation] = useState({})
 
     function handleChange(value) {
-        setSelectedProvince(value);
+        setSelectedProvince({ id: value });
+        setSelectedDistrict({ id: null });
+        setSelectedWard({ id: null });
         axios.post('http://localhost/vaccine-manager/api/roles/admin/district/read_with_province_id.php?province_id=' + value)
             .then(function (res) {
                 const { records } = res.data;
@@ -36,12 +38,17 @@ export default function UserInfo(props) {
     }
 
     const handleChangeD = value => {
-        setSelectedDistrict(value);
+        setSelectedDistrict({ id: value });
+        setSelectedWard({ id: null });
         axios.post('http://localhost/vaccine-manager/api/roles/admin/ward/read_with_district_id.php?district_id=' + value)
             .then(res => {
                 const { records } = res.data;
                 setward(records);
             })
+    }
+
+    const handleChangeW = value => {
+        setSelectedWard({ id: value });
     }
 
     useEffect(() => {
@@ -98,9 +105,9 @@ export default function UserInfo(props) {
         email: props.user.email,
         gender: props.user.gender,
         pwd: "",
-        province_id: selectedProvince.id,
-        district_id: selectedDistrict.id,
-        ward_id: selectedWard.id,
+        province_id: selectedProvince.id ? selectedProvince.id : "Chọn thành phố",
+        district_id: selectedDistrict.id ? selectedDistrict.id : "Chọn quận huyện",
+        ward_id: selectedWard.id ? selectedWard.id : "Chọn xã",
         birthday: (props.user.birthday) ? moment(props.user.birthday) : null
     });
 
@@ -250,7 +257,7 @@ export default function UserInfo(props) {
                         </Select>
                     </Form.Item>
                     <Form.Item label="Xã" name='ward_id'  >
-                        <Select style={{ width: 210 }}>
+                        <Select style={{ width: 210 }} onChange={handleChangeW}>
                             {
                                 ward.map(p => <Option key={p.id}>{p.name}</Option>)
                             }
