@@ -136,7 +136,7 @@ export default function UserInfo(props) {
 
     return (
         <div className="editUser">
-            <h1>Khai báo thông tin</h1>
+            <h1>Cập nhật thông tin</h1>
             <div className="editorWrapper">
                 <Form
                     form={form}
@@ -237,9 +237,9 @@ export default function UserInfo(props) {
                         name='gender'
                         label='Giới tính'>
                         <Select style={{ width: 210 }}>
-                            <Option value='m'>Nam</Option>
-                            <Option value='f'>Nữ</Option>
-                            <Option value='d'>Others</Option>
+                            <Option value='Nam'>Nam</Option>
+                            <Option value='Nữ'>Nữ</Option>
+                            <Option value='Khác'>Others</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item label="Thành phố" name="province_id">

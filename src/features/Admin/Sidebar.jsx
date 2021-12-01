@@ -23,7 +23,7 @@ export default function Sidebar() {
     }
 
     const handleLogout = () => {
-        window.location = 'http://localhost:3000/login';
+        window.location = 'http://localhost:3000/loginAdmin';
         localStorage.clear();
     }
 
